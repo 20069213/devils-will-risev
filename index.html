@@ -1,363 +1,736 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#050505">
-<title>DEVILS WILL RISE | Abdo Saad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050707">
+<title>DEVIL CONTROL | Abdo Saad</title>
+
 <style>
 :root{
- --bg:#050505;--panel:#0b0d0c;--green:#00ff88;
- --red:#ff2345;--text:#e9fff1;--muted:#8aa398;
- --border:#17452e;
+  --bg:#050707;
+  --panel:#0a1010;
+  --panel2:#0d1514;
+  --green:#00ff9c;
+  --red:#ff2548;
+  --text:#e8fff5;
+  --muted:#7e9990;
+  --border:rgba(0,255,156,.19);
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
- margin:0;background:var(--bg);color:var(--text);
- font-family:Tahoma,Arial,sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;
+  overflow-x:hidden;
 }
 #matrix{
- position:fixed;inset:0;width:100%;height:100%;
- opacity:.13;pointer-events:none;z-index:-1
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:.13;
+  pointer-events:none;
+  z-index:-1;
 }
-header{
- padding:22px 15px;text-align:center;
- border-bottom:1px solid var(--border);
- background:#050807eF;
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.app{min-height:100vh}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:15px 5%;
+  background:rgba(5,7,7,.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  direction:ltr;
 }
 .logo{
- font-size:clamp(24px,6vw,42px);font-weight:900;
- color:var(--green);text-shadow:0 0 18px #00ff8877;
- margin:10px 0
+  width:43px;height:43px;
+  display:grid;place-items:center;
+  border:1px solid var(--green);
+  color:var(--green);
+  font-size:24px;
+  font-weight:900;
+  box-shadow:0 0 20px #00ff9c25;
+  clip-path:polygon(15% 0,85% 0,100% 20%,100% 80%,85% 100%,15% 100%,0 80%,0 20%);
 }
-.subtitle{color:var(--muted);font-size:12px;line-height:2}
-.pill{
- display:inline-block;border:1px solid var(--red);
- color:var(--red);border-radius:30px;padding:6px 12px;
- font-size:11px;letter-spacing:1px
+.brand h1{
+  font-size:17px;
+  letter-spacing:2px;
+  margin:0;
 }
-.layout{display:grid;grid-template-columns:220px minmax(0,1fr);
- max-width:1250px;margin:auto;min-height:75vh}
-aside{padding:15px;border-left:1px solid var(--border)}
-nav button{
- display:block;text-align:right;width:100%;margin:6px 0;
- background:transparent;color:var(--text);
- border:1px solid transparent;padding:13px;border-radius:8px;
- cursor:pointer
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+  letter-spacing:1px;
 }
-nav button:hover,nav button.active{
- border-color:var(--green);background:#00ff8810;color:var(--green)
+.status{
+  direction:ltr;
+  display:flex;align-items:center;gap:8px;
+  color:var(--green);
+  font-size:11px;
 }
-main{padding:20px;min-width:0}
-h2{font-size:22px;color:var(--green);margin-top:0}
-h3{font-size:15px}
-p{line-height:1.8}
-.muted{color:var(--muted);font-size:12px}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.card,.panel{
- border:1px solid var(--border);background:#090d0bf2;
- padding:17px;border-radius:12px;min-width:0
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+  animation:pulse 1.5s infinite;
 }
-.card{cursor:pointer;transition:.2s}
-.card:hover{border-color:var(--green);transform:translateY(-2px)}
-.icon{font-size:27px}
-.card p{font-size:12px;color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
- gap:10px;margin-bottom:17px}
-.stat{border:1px solid var(--border);padding:13px;border-radius:9px;
- background:#080b09}
-.stat strong{display:block;color:var(--green);font-size:22px;margin-bottom:6px}
-.stat span{font-size:11px;color:var(--muted)}
-.panel{margin-bottom:15px}
-input,textarea,select{
- width:100%;background:#030604;border:1px solid #28513a;
- color:var(--text);padding:12px;border-radius:7px;margin:8px 0;
- font:inherit
+@keyframes pulse{50%{opacity:.35}}
+.layout{
+  width:min(1400px,94%);
+  margin:25px auto;
+  display:grid;
+  grid-template-columns:230px minmax(0,1fr);
+  gap:20px;
 }
-input[type=file]{font-size:12px}
-button.action{
- padding:12px 15px;background:var(--green);color:#001b0d;
- font-weight:bold;border:0;border-radius:7px;cursor:pointer;
- margin:5px 0
+.sidebar,.card{
+  background:linear-gradient(145deg,#0c1312,#070a0a);
+  border:1px solid var(--border);
+  border-radius:12px;
 }
-button.secondary{background:#171b19;color:var(--text);
- border:1px solid var(--border)}
-button.danger{background:#351017;color:#ff8a9b;
- border:1px solid var(--red)}
-button:focus-visible,input:focus-visible{
- outline:2px solid var(--green);outline-offset:2px
+.sidebar{
+  padding:18px;
+  height:max-content;
+  position:sticky;
+  top:88px;
 }
-.output{
- white-space:pre-wrap;overflow-wrap:anywhere;
- background:#020403;border-right:3px solid var(--green);
- color:var(--green);padding:14px;border-radius:5px;
- min-height:85px;font:12px/1.9 monospace
+.side-title{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:2px;
+  margin:5px 8px 15px;
+  direction:ltr;
+  text-align:left;
 }
-.ltr{direction:ltr;text-align:left}
-.hidden{display:none!important}
-.tag{color:var(--green);font-size:11px}
-.warning{color:#ff9aa8;font-size:12px}
-footer{text-align:center;border-top:1px solid var(--border);
- padding:23px;color:var(--muted);font-size:12px}
-@media(max-width:700px){
- .layout{grid-template-columns:1fr}
- aside{border-left:0;border-bottom:1px solid var(--border);padding:8px}
- nav{display:flex;gap:6px;overflow-x:auto}
- nav button{white-space:nowrap;width:auto;min-width:max-content;
- padding:10px;font-size:12px}
- main{padding:13px}
- .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
- .stat{padding:9px 5px}
- .stat strong{font-size:18px}
- .stat span{font-size:10px}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 12px;
+  margin:5px 0;
+  border-radius:7px;
+  color:#a8bdb5;
+  font-size:13px;
+  transition:.2s;
 }
-@media(max-width:380px){.cards{grid-template-columns:1fr}}
+.nav:hover,.nav.active{
+  color:var(--green);
+  background:#00ff9c0b;
+  border-right:2px solid var(--green);
+}
+.nav span:first-child{font-size:17px}
+.sidebar-bottom{
+  margin-top:25px;
+  padding:14px 10px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:11px;
+  line-height:2;
+}
+main{min-width:0}
+.hero{
+  position:relative;
+  padding:28px;
+  min-height:205px;
+  border:1px solid #ff25482b;
+  border-radius:13px;
+  background:
+    radial-gradient(ellipse at 5% 10%,#ff254814,transparent 45%),
+    linear-gradient(120deg,#0d1111,#080a0a);
+  overflow:hidden;
+}
+.hero:after{
+  content:"DC";
+  position:absolute;
+  left:25px;bottom:-35px;
+  font-size:155px;font-weight:900;
+  color:#ffffff04;
+  direction:ltr;
+  pointer-events:none;
+}
+.eyebrow{
+  direction:ltr;
+  text-align:right;
+  color:var(--red);
+  font-size:10px;
+  letter-spacing:3px;
+}
+.hero h2{
+  font-size:clamp(25px,4vw,42px);
+  margin:18px 0 10px;
+  letter-spacing:1px;
+  direction:ltr;
+  text-align:right;
+}
+.hero h2 b{color:var(--green)}
+.hero p{
+  color:#91a69e;
+  line-height:1.9;
+  font-size:13px;
+  max-width:620px;
+}
+.hero-actions{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
+}
+.btn{
+  border:1px solid var(--green);
+  padding:11px 16px;
+  border-radius:6px;
+  background:#00ff9c10;
+  color:var(--green);
+  font-size:12px;
+  transition:.2s;
+}
+.btn:hover{background:var(--green);color:#00170c}
+.btn.red{border-color:var(--red);color:var(--red);background:#ff25480b}
+.btn.red:hover{background:var(--red);color:white}
+.section-title{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;
+  margin:25px 0 13px;
+}
+.section-title h3{
+  font-size:14px;margin:0;
+}
+.section-title small{
+  font-size:10px;color:var(--muted);
+  direction:ltr;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.stat{padding:17px}
+.stat .label{font-size:11px;color:var(--muted)}
+.stat .number{
+  font-size:26px;
+  font-weight:bold;
+  margin:13px 0 7px;
+  direction:ltr;
+  text-align:right;
+}
+.green{color:var(--green)}
+.redtext{color:var(--red)}
+.stat small{font-size:10px;color:#698078}
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.card{padding:18px;min-width:0}
+.card h4{margin:0 0 8px;font-size:13px}
+.sub{font-size:11px;color:var(--muted);line-height:1.8}
+.chart{
+  width:100%;height:145px;display:block;margin-top:15px;
+}
+.bars{
+  display:flex;align-items:end;justify-content:space-around;
+  height:110px;gap:8px;margin-top:20px;
+  border-bottom:1px solid #ffffff15;
+  direction:ltr;
+}
+.bar{
+  flex:1;max-width:35px;
+  background:linear-gradient(to top,#00ff9c22,var(--green));
+  border-radius:4px 4px 0 0;
+  min-height:8px;
+  animation:rise .8s ease-out;
+}
+@keyframes rise{from{height:0}}
+.bar-labels{
+  display:flex;justify-content:space-around;
+  color:var(--muted);font-size:9px;margin-top:8px;direction:ltr;
+}
+.system-list{margin-top:15px}
+.system-row{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:13px 0;border-bottom:1px solid #ffffff0b;
+  font-size:11px;
+}
+.system-row:last-child{border:0}
+.badge{
+  font-size:9px;padding:5px 8px;border-radius:4px;
+  color:var(--green);background:#00ff9c12;
+}
+.badge.red{color:var(--red);background:#ff254812}
+.progress{
+  height:4px;background:#ffffff12;border-radius:8px;
+  margin-top:9px;overflow:hidden;
+}
+.progress span{
+  display:block;height:100%;width:0;
+  background:var(--green);transition:width .6s;
+}
+.terminal{
+  background:#020504;
+  border:1px solid #00ff9c24;
+  border-radius:8px;
+  overflow:hidden;
+  direction:ltr;
+  text-align:left;
+}
+.terminal-head{
+  padding:12px 14px;
+  border-bottom:1px solid #00ff9c18;
+  color:var(--muted);font-size:10px;
+  display:flex;justify-content:space-between;
+}
+.terminal-body{
+  height:175px;overflow:auto;padding:14px;
+  font:12px/1.9 monospace;color:#8fb4a3;
+}
+.terminal-body .ok{color:var(--green)}
+.terminal-body .warn{color:#ffc857}
+.command-row{display:flex;gap:8px;margin-top:12px}
+.command-row input{
+  flex:1;min-width:0;
+  background:#060a08;color:var(--green);
+  border:1px solid var(--border);border-radius:6px;
+  padding:12px;outline:none;direction:ltr;
+}
+.command-row input:focus{border-color:var(--green)}
+.filebox{
+  margin-top:15px;
+  padding:18px;
+  border:1px dashed #00ff9c4d;
+  background:#00ff9c05;
+  border-radius:8px;
+  text-align:center;
+}
+.filebox p{font-size:11px;color:var(--muted);line-height:1.8}
+.filebox input{max-width:100%;font-size:11px;color:var(--muted)}
+.file-list{text-align:left;direction:ltr;font-size:11px;line-height:2;overflow-wrap:anywhere}
+.notice{
+  padding:12px 14px;
+  border-right:3px solid #ffc857;
+  background:#ffc85709;color:#c9b98b;
+  border-radius:4px;font-size:11px;line-height:1.9;
+  margin-top:14px;
+}
+footer{
+  text-align:center;padding:25px 10px 35px;
+  color:#60756c;font-size:10px;line-height:2;
+}
+footer b{color:var(--green)}
+#toast{
+  position:fixed;bottom:20px;left:50%;
+  transform:translateX(-50%);
+  padding:12px 18px;background:#0c1712;
+  border:1px solid var(--green);color:var(--green);
+  border-radius:8px;font-size:12px;
+  z-index:99;display:none;max-width:90%;text-align:center;
+}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;padding:10px;display:flex;gap:5px;overflow-x:auto}
+  .side-title,.sidebar-bottom{display:none}
+  .nav{white-space:nowrap;margin:0;padding:10px;font-size:11px}
+  .nav span:first-child{font-size:14px}
+}
+@media(max-width:600px){
+  .topbar{padding:12px 4%}
+  .brand h1{font-size:14px}
+  .brand small{font-size:8px}
+  .logo{width:37px;height:37px}
+  .status{font-size:9px}
+  .layout{width:94%;margin:14px auto}
+  .hero{padding:20px}
+  .hero h2{font-size:26px}
+  .hero:after{font-size:110px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .stat{padding:13px}
+  .stat .number{font-size:23px}
+  .grid2{grid-template-columns:1fr}
+  .card{padding:15px}
+}
 </style>
 </head>
+
 <body>
-<canvas id="matrix" aria-hidden="true"></canvas><header>
- <span class="pill">CYBER SECURITY INTERFACE</span>
- <div class="logo">☠ DEVILS WILL RISE ☠</div>
- <div class="subtitle">
-  DEVELOPER: ABDO SAAD<br>
-  منصة الأمن السيبراني والتدريب التقني
- </div>
-</header><div class="layout">
-<aside>
- <nav id="nav">
-  <button class="active" data-page="home">⌂ Dashboard</button>
-  <button data-page="scanner">🛡 Security Scanner</button>
-  <button data-page="lab">🧪 Cyber Lab</button>
-  <button data-page="terminal">⌘ Terminal</button>
-  <button data-page="devices">▣ Device Manager</button>
-  <button data-page="files">⇧ File Transfer</button>
-  <button data-page="reports">▤ Reports</button>
-  <button data-page="about">⚙ About</button>
- </nav>
-</aside><main>
-<section id="page-home" class="page">
- <h2>لوحة التحكم / Dashboard</h2>
- <p class="muted">مرحبًا بك في مركز DEVILS WILL RISE الأمني.</p>
- <div class="stats">
-  <div class="stat"><strong id="uptime">ONLINE</strong><span>واجهة الموقع</span></div>
-  <div class="stat"><strong>06</strong><span>أدوات الواجهة</span></div>
-  <div class="stat"><strong id="clock">--:--</strong><span>الوقت المحلي</span></div>
- </div>
- <div class="cards">
-  <div class="card" data-open="scanner"><div class="icon">🛡️</div>
-   <h3>Security Scanner</h3><p>التحقق من عنوان موقع وإرشادات الأمان.</p></div>
-  <div class="card" data-open="lab"><div class="icon">🧪</div>
-   <h3>Cyber Lab</h3><p>تدريب على خطوات اختبار الأمان.</p></div>
-  <div class="card" data-open="terminal"><div class="icon">💻</div>
-   <h3>Terminal</h3><p>أوامر تدريبية داخل المتصفح.</p></div>
-  <div class="card" data-open="devices"><div class="icon">📱</div>
-   <h3>Device Manager</h3><p>عرض حالة الربط بالأجهزة.</p></div>
-  <div class="card" data-open="files"><div class="icon">📂</div>
-   <h3>File Transfer</h3><p>اختيار ملفات محليًا لمعاينة أسمائها.</p></div>
-  <div class="card" data-open="reports"><div class="icon">📊</div>
-   <h3>Reports</h3><p>ملخص حالة أدوات هذه النسخة.</p></div>
- </div>
-</section><section id="page-scanner" class="page hidden">
- <h2>🛡 Security Scanner</h2>
- <div class="panel">
-  <p>أدخل عنوان موقع تملكه أو لديك إذن بفحصه.</p>
-  <input id="urlInput" class="ltr" type="url" placeholder="https://example.com">
-  <button class="action" id="checkUrl">تحقق من العنوان</button>
-  <div class="output" id="scanOutput">بانتظار عنوان الموقع...</div>
-  <p class="muted">هذه النسخة تتحقق من صيغة العنوان فقط، ولا تدّعي اكتشاف الثغرات.</p>
- </div>
- <div class="panel">
-  <h3>قائمة مراجعة أمنية</h3>
-  <ul class="muted">
-   <li>استخدام HTTPS.</li><li>تحديث البرمجيات.</li>
-   <li>تفعيل المصادقة متعددة العوامل.</li>
-   <li>تقييد الصلاحيات والاحتفاظ بنسخ احتياطية.</li>
-  </ul>
- </div>
-</section><section id="page-lab" class="page hidden">
- <h2>🧪 Cyber Lab</h2>
- <div class="panel">
-  <p>مختبر تدريبي لتعلّم منهجية اختبار الأمان.</p>
-  <button class="action" id="startLab">بدء التدريب</button>
-  <div class="output" id="labOutput">LAB READY</div>
- </div>
-</section><section id="page-terminal" class="page hidden">
- <h2>💻 Terminal</h2>
- <div class="panel">
-  <p class="muted">هذه وحدة أوامر تدريبية. لا تنفّذ أوامر نظام التشغيل.</p>
-  <div class="output" id="terminalOutput">DEVILS WILL RISE TERMINAL v1.0
-اكتب help لعرض الأوامر.</div>
-  <input id="commandInput" class="ltr" placeholder="help">
-  <button class="action" id="runCommand">Run Command</button>
-  <button class="action secondary" id="clearTerminal">Clear</button>
- </div>
-</section><section id="page-devices" class="page hidden">
- <h2>📱 Device Manager</h2>
- <div class="panel">
-  <h3>حالة ربط الأجهزة</h3>
-  <div class="output" id="deviceOutput">لا توجد أجهزة مرتبطة.
-Pairing server: Not configured</div>
-  <button class="action" id="deviceStatus">تحديث الحالة</button>
-  <p class="warning">هذه الواجهة لا تتصل بالأجهزة تلقائيًا. يلزم تطبيق أندرويد وخادم فعلي، مع موافقة صاحب الجهاز.</p>
- </div>
-</section><section id="page-files" class="page hidden">
- <h2>📂 File Transfer</h2>
- <div class="panel">
-  <p>اختر الملفات التي تريد معاينة أسمائها على جهازك.</p>
-  <input type="file" id="fileInput" multiple>
-  <button class="action" id="listFiles">عرض الملفات المختارة</button>
-  <div class="output" id="fileOutput">لم يتم اختيار ملفات.</div>
-  <p class="muted">الملفات لا تُرفع إلى الإنترنت في هذه النسخة.</p>
- </div>
-</section><section id="page-reports" class="page hidden">
- <h2>📊 Reports</h2>
- <div class="panel">
-  <button class="action" id="makeReport">إنشاء تقرير حالة</button>
-  <button class="action secondary" id="downloadReport">تنزيل التقرير النصي</button>
-  <div class="output" id="reportOutput">لم يتم إنشاء التقرير بعد.</div>
- </div>
-</section><section id="page-about" class="page hidden">
- <h2>⚙ About</h2>
- <div class="panel">
-  <h3>DEVILS WILL RISE</h3>
-  <p>Developed by Abdo Saad</p>
-  <p class="muted">واجهة أمن سيبراني وتدريب تقني. لا تحتوي هذه النسخة على خادم خلفي أو نظام تحكم بالأجهزة.</p>
-  <p class="tag">VERSION 1.0.0</p>
- </div>
-</section>
-</main>
-</div><footer>DEVILS WILL RISE © 2026 — Developed by Abdo Saad</footer><script>
-"use strict";
+<canvas id="matrix"></canvas>
 
-const $ = id => document.getElementById(id);
-const pages = [...document.querySelectorAll(".page")];
+<div class="app">
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">D</div>
+    <div>
+      <h1>DEVIL CONTROL</h1>
+      <small>ABDO SAAD // CONTROL CENTER</small>
+    </div>
+  </div>
+  <div class="status"><span class="dot"></span> INTERFACE ONLINE</div>
+</header>
 
-function openPage(name){
- pages.forEach(p=>p.classList.toggle("hidden",p.id!=="page-"+name));
- document.querySelectorAll("#nav button").forEach(b=>
-  b.classList.toggle("active",b.dataset.page===name));
- window.scrollTo({top:0,behavior:"smooth"});
-}
-document.querySelectorAll("#nav button").forEach(b=>
- b.addEventListener("click",()=>openPage(b.dataset.page)));
-document.querySelectorAll("[data-open]").forEach(c=>
- c.addEventListener("click",()=>openPage(c.dataset.open)));
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-title">MAIN MENU</div>
+    <a class="nav active" href="#overview"><span>◈</span> لوحة القيادة</a>
+    <a class="nav" href="#monitor"><span>▦</span> المراقبة</a>
+    <a class="nav" href="#terminal"><span>⌘</span> شاشة الأوامر</a>
+    <a class="nav" href="#files"><span>⇧</span> الملفات</a>
+    <a class="nav" href="#security"><span>⬡</span> الأمان</a>
+    <div class="sidebar-bottom">
+      DEVELOPER<br>
+      <b style="color:var(--green)">ABDO SAAD</b><br>
+      UI VERSION 2.0<br>
+      LOCAL DEMO MODE
+    </div>
+  </aside>
 
-function updateClock(){
- $("clock").textContent=new Date().toLocaleTimeString([],{
-  hour:"2-digit",minute:"2-digit"
- });
-}
-updateClock();
-setInterval(updateClock,15000);
+  <main>
+    <section class="hero" id="overview">
+      <div class="eyebrow">ADVANCED INTERFACE / 2026</div>
+      <h2>WELCOME TO <b>DEVIL</b><br>CONTROL CENTER</h2>
+      <p>
+        لوحة تحكم بواجهة سينمائية مستوحاة من أنظمة الأمن السيبراني.
+        استكشف أدوات العرض التجريبية، ومراقبة الواجهة، واختيار الملفات يدويًا.
+      </p>
+      <div class="hero-actions">
+        <a href="#monitor" class="btn">◈ عرض لوحة المراقبة</a>
+        <a href="#terminal" class="btn red">⌘ فتح شاشة الأوامر</a>
+      </div>
+    </section>
 
-$("checkUrl").addEventListener("click",()=>{
- const value=$("urlInput").value.trim();
- try{
-  const u=new URL(value);
-  if(!["https:","http:"].includes(u.protocol))throw Error();
-  $("scanOutput").textContent=
-   "URL FORMAT: VALID\n"+
-   "Hostname: "+u.hostname+
-   "\nProtocol: "+u.protocol+
-   "\n\nلم يتم إجراء فحص ثغرات أو اتصال بالخادم.";
- }catch{
-  $("scanOutput").textContent="خطأ: أدخل عنوانًا صحيحًا يبدأ بـ https://";
- }
-});
+    <div class="section-title">
+      <h3>◈ مؤشرات النظام</h3>
+      <small id="clock">--:--:--</small>
+    </div>
 
-$("startLab").addEventListener("click",()=>{
- $("labOutput").textContent=
- "CYBER LAB — TRAINING\n"+
- "01. Identify assets and scope.\n"+
- "02. Review security configuration.\n"+
- "03. Document findings.\n"+
- "04. Prioritize and fix issues.\n"+
- "05. Retest and prepare a report.\n"+
- "\nTraining checklist completed.";
-});
+    <section class="stats">
+      <div class="card stat">
+        <div class="label">واجهة النظام</div>
+        <div class="number green">ONLINE</div>
+        <small>الموقع يعمل محليًا</small>
+      </div>
+      <div class="card stat">
+        <div class="label">مستوى الأمان</div>
+        <div class="number green">LOCAL</div>
+        <small>لا يوجد اتصال بأجهزة خارجية</small>
+      </div>
+      <div class="card stat">
+        <div class="label">عمليات تجريبية</div>
+        <div class="number" id="operations">000</div>
+        <small>تفاعلات داخل الصفحة</small>
+      </div>
+      <div class="card stat">
+        <div class="label">حالة الربط</div>
+        <div class="number redtext">OFF</div>
+        <small>الخادم غير متصل</small>
+      </div>
+    </section>
 
-function runTerminal(){
- const input=$("commandInput").value.trim();
- const cmd=input.toLowerCase();
- const answers={
-  help:"Available commands: help, date, status, about, clear",
-  date:"Local time: "+new Date().toLocaleString(),
-  status:"Web interface: online\nBackend server: not configured\nDevice pairing: not configured",
-  about:"DEVILS WILL RISE — Developed by Abdo Saad"
- };
- if(cmd==="clear"){$("terminalOutput").textContent="Terminal cleared.";return;}
- $("terminalOutput").textContent=answers[cmd]||
-  "Unknown command: "+input+"\nType help to list available commands.";
-}
-$("runCommand").addEventListener("click",runTerminal);
-$("commandInput").addEventListener("keydown",e=>{
- if(e.key==="Enter")runTerminal();
-});
-$("clearTerminal").addEventListener("click",()=>
- $("terminalOutput").textContent="Terminal cleared.");
+    <div class="section-title" id="monitor">
+      <h3>▦ المراقبة والتحليلات</h3>
+      <small>DEMO VISUALIZATION</small>
+    </div>
 
-$("deviceStatus").addEventListener("click",()=>
- $("deviceOutput").textContent=
- "Status checked: "+new Date().toLocaleString()+
- "\nNo pairing server configured.\nNo devices connected.");
+    <section class="grid2">
+      <div class="card">
+        <h4>نشاط الواجهة</h4>
+        <div class="sub">رسم متحرك تجريبي — وليس بيانات شبكة حقيقية.</div>
+        <canvas id="chart" class="chart"></canvas>
+      </div>
+      <div class="card">
+        <h4>مؤشر النشاط</h4>
+        <div class="sub">قيم مرئية تجريبية تتغير تلقائيًا.</div>
+        <div class="bars" id="bars"></div>
+        <div class="bar-labels">
+          <span>01</span><span>02</span><span>03</span>
+          <span>04</span><span>05</span><span>06</span><span>07</span>
+        </div>
+      </div>
+    </section>
 
-$("listFiles").addEventListener("click",()=>{
- const files=[...$("fileInput").files];
- $("fileOutput").textContent=files.length
-  ? files.map(f=>f.name+" — "+f.size+" bytes").join("\n")
-  : "لم يتم اختيار ملفات.";
-});
+    <div class="section-title">
+      <h3>⬡ حالة الخدمات</h3>
+      <small>LOCAL STATUS</small>
+    </div>
 
-function buildReport(){
- return [
-  "DEVILS WILL RISE — STATUS REPORT",
-  "Generated: "+new Date().toLocaleString(),
-  "Web interface: loaded",
-  "URL syntax checker: available",
-  "Cyber Lab: training checklist available",
-  "Terminal: simulated commands only",
-  "Device server: not configured",
-  "File transfer server: not configured"
- ].join("\n");
-}
-$("makeReport").addEventListener("click",()=>
- $("reportOutput").textContent=buildReport());
-$("downloadReport").addEventListener("click",()=>{
- const blob=new Blob([buildReport()],{type:"text/plain;charset=utf-8"});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
- a.href=url;a.download="devils-will-rise-report.txt";
- a.click();URL.revokeObjectURL(url);
-});
+    <section class="grid2" id="security">
+      <div class="card">
+        <h4>حالة المكونات</h4>
+        <div class="system-list">
+          <div class="system-row">
+            <span>واجهة المستخدم</span><span class="badge">READY</span>
+          </div>
+          <div class="system-row">
+            <span>المؤثرات البصرية</span><span class="badge">ACTIVE</span>
+          </div>
+          <div class="system-row">
+            <span>خادم البيانات</span><span class="badge red">NOT CONNECTED</span>
+          </div>
+          <div class="system-row">
+            <span>التحكم بالأجهزة</span><span class="badge red">NOT CONNECTED</span>
+          </div>
+        </div>
+      </div>
 
-/* Decorative Matrix animation */
-const canvas=$("matrix"),ctx=canvas.getContext("2d");
-let drops=[],columns=0;
+      <div class="card">
+        <h4>مؤشرات الواجهة</h4>
+        <div class="system-row"><span>الرسم البصري</span><span id="p1">80%</span></div>
+        <div class="progress"><span id="pb1"></span></div>
+        <div class="system-row"><span>استجابة الواجهة</span><span id="p2">92%</span></div>
+        <div class="progress"><span id="pb2"></span></div>
+        <div class="system-row"><span>حالة العرض</span><span class="badge">NORMAL</span></div>
+        <p class="sub">المؤشرات للعرض فقط، ولا تمثل قياسًا فعليًا للجهاز.</p>
+      </div>
+    </section>
+
+    <div class="section-title" id="terminal">
+      <h3>⌘ شاشة الأوامر</h3>
+      <small>SAFE DEMO TERMINAL</small>
+    </div>
+
+    <section class="card">
+      <div class="terminal">
+        <div class="terminal-head">
+          <span>DEVIL://LOCAL-CONSOLE</span>
+          <span style="color:var(--green)">● READY</span>
+        </div>
+        <div class="terminal-body" id="terminalOutput">
+          <div class="ok">DEVIL CONTROL CONSOLE v2.0</div>
+          <div>Developer: Abdo Saad</div>
+          <div>Mode: Local simulation only</div>
+          <div class="warn">Type "help" to view available demo commands.</div>
+        </div>
+      </div>
+      <div class="command-row">
+        <input id="commandInput" type="text" placeholder="اكتب help ثم اضغط Enter..." autocomplete="off">
+        <button class="btn" id="runCommand">تنفيذ</button>
+      </div>
+      <p class="sub">الأوامر هنا تجريبية داخل الصفحة ولا تنفذ عمليات على أجهزة أو خوادم.</p>
+    </section>
+
+    <div class="section-title" id="files">
+      <h3>⇧ اختيار الملفات</h3>
+      <small>USER-SELECTED FILES</small>
+    </div>
+
+    <section class="card">
+      <h4>اختيار ملفات من جهازك</h4>
+      <p class="sub">
+        اختر الملفات بنفسك لعرض أسمائها وأحجامها داخل الصفحة.
+        لن يتم رفعها إلى الإنترنت أو إرسالها إلى أي شخص.
+      </p>
+      <div class="filebox">
+        <p>📁 اختر الصور أو الفيديوهات أو الملفات التي تريد عرضها</p>
+        <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf,.txt">
+        <div class="file-list" id="fileList"></div>
+      </div>
+      <div class="notice">
+        تنبيه: هذه الصفحة واجهة ويب فقط. لا يمكنها الوصول إلى الملفات أو جهات الاتصال
+        أو التحكم عن بُعد في هاتف آخر دون آلية موثوقة وصلاحيات وموافقة واضحة.
+        رفع الملفات إلى خادم يحتاج إلى خادم فعلي وإجراء يوافق عليه المستخدم.
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h3>◈ معلومات المشروع</h3>
+      <small>ABOUT</small>
+    </div>
+
+    <section class="card">
+      <div class="system-list">
+        <div class="system-row"><span>اسم المشروع</span><span class="green">DEVIL CONTROL</span></div>
+        <div class="system-row"><span>المطور</span><span>Abdo Saad</span></div>
+        <div class="system-row"><span>الإصدار</span><span>2.0 WEB</span></div>
+        <div class="system-row"><span>نوع المشروع</span><span>واجهة تفاعلية تجريبية</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <b>DEVIL CONTROL</b> — Designed by Abdo Saad<br>
+  واجهة تعليمية وتجريبية، ولا تمثل نظام مراقبة أو تحكم فعليًا.
+</footer>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// MATRIX BACKGROUND
+const matrix = document.getElementById("matrix");
+const mctx = matrix.getContext("2d");
+let drops = [];
 function resizeMatrix(){
- const dpr=Math.min(window.devicePixelRatio||1,2);
- canvas.width=innerWidth*dpr;
- canvas.height=innerHeight*dpr;
- canvas.style.width=innerWidth+"px";
- canvas.style.height=innerHeight+"px";
- ctx.setTransform(dpr,0,0,dpr,0,0);
- columns=Math.ceil(innerWidth/16);
- drops=Array(columns).fill(1);
+  matrix.width = window.innerWidth;
+  matrix.height = window.innerHeight;
+  drops = Array(Math.ceil(matrix.width/16)).fill(1);
 }
 resizeMatrix();
 window.addEventListener("resize",resizeMatrix);
 function drawMatrix(){
- ctx.fillStyle="rgba(5,5,5,0.09)";
- ctx.fillRect(0,0,innerWidth,innerHeight);
- ctx.font="14px monospace";
- for(let i=0;i<drops.length;i++){
-  const char=String.fromCharCode(0x30A0+Math.random()*96);
-  ctx.fillStyle=Math.random()>.985?"#ff2345":"#00ff88";
-  ctx.fillText(char,i*16,drops[i]*16);
-  if(drops[i]*16>innerHeight&&Math.random()>.975)drops[i]=0;
-  drops[i]++;
- }
- requestAnimationFrame(drawMatrix);
+  mctx.fillStyle="rgba(5,7,7,0.08)";
+  mctx.fillRect(0,0,matrix.width,matrix.height);
+  mctx.fillStyle="#00ff9c";
+  mctx.font="14px monospace";
+  drops.forEach((y,i)=>{
+    const char=String.fromCharCode(0x30A0+Math.random()*96);
+    mctx.fillText(char,i*16,y*16);
+    if(y*16>matrix.height && Math.random()>.975) drops[i]=0;
+    drops[i]++;
+  });
 }
-drawMatrix();
-</script></body>
-</html>
+setInterval(drawMatrix,65);
+
+// CLOCK
+function updateClock(){
+  document.getElementById("clock").textContent =
+    new Date().toLocaleTimeString("en-GB");
+}
+updateClock();
+setInterval(updateClock,1000);
+
+// DEMO BARS
+const barsBox=document.getElementById("bars");
+function makeBars(){
+  barsBox.innerHTML="";
+  for(let i=0;i<7;i++){
+    const bar=document.createElement("div");
+    bar.className="bar";
+    bar.style.height=(15+Math.random()*80)+"%";
+    barsBox.appendChild(bar);
+  }
+}
+makeBars();
+setInterval(makeBars,2500);
+
+// CHART
+const chart=document.getElementById("chart");
+const cctx=chart.getContext("2d");
+let values=Array.from({length:32},()=>30+Math.random()*60);
+function drawChart(){
+  const dpr=window.devicePixelRatio||1;
+  const w=chart.clientWidth,h=chart.clientHeight;
+  chart.width=w*dpr;chart.height=h*dpr;
+  cctx.setTransform(dpr,0,0,dpr,0,0);
+  cctx.clearRect(0,0,w,h);
+  cctx.strokeStyle="rgba(0,255,156,.12)";
+  cctx.lineWidth=1;
+  for(let y=10;y<h;y+=30){
+    cctx.beginPath();cctx.moveTo(0,y);cctx.lineTo(w,y);cctx.stroke();
+  }
+  values.push(30+Math.random()*60);values.shift();
+  cctx.beginPath();
+  values.forEach((v,i)=>{
+    const x=i/(values.length-1)*w;
+    const y=h-(v/100)*(h-12)-5;
+    if(i===0)cctx.moveTo(x,y);else cctx.lineTo(x,y);
+  });
+  cctx.strokeStyle="#00ff9c";cctx.lineWidth=2;cctx.stroke();
+  cctx.lineTo(w,h);cctx.lineTo(0,h);cctx.closePath();
+  cctx.fillStyle="rgba(0,255,156,.07)";cctx.fill();
+}
+drawChart();
+setInterval(drawChart,800);
+window.addEventListener("resize",drawChart);
+
+// DEMO METRICS
+function randomMetric(id,labelId,min,max){
+  const value=Math.floor(min+Math.random()*(max-min));
+  document.getElementById(id).style.width=value+"%";
+  document.getElementById(labelId).textContent=value+"%";
+}
+setInterval(()=>{
+  randomMetric("pb1","p1",65,99);
+  randomMetric("pb2","p2",75,100);
+},3000);
+randomMetric("pb1","p1",65,99);
+randomMetric("pb2","p2",75,100);
+
+// TOAST
+function toast(message){
+  const el=document.getElementById("toast");
+  el.textContent=message;el.style.display="block";
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>el.style.display="none",2600);
+}
+
+// TERMINAL — SAFE LOCAL COMMANDS ONLY
+let operationCount=0;
+const output=document.getElementById("terminalOutput");
+const input=document.getElementById("commandInput");
+function printLine(text,className=""){
+  const line=document.createElement("div");
+  line.textContent=text;
+  if(className)line.className=className;
+  output.appendChild(line);
+  output.scrollTop=output.scrollHeight;
+}
+function run(){
+  const cmd=input.value.trim().toLowerCase();
+  if(!cmd)return;
+  printLine("visitor@devil:~$ "+cmd);
+  input.value="";
+  operationCount++;
+  document.getElementById("operations").textContent=
+    String(operationCount).padStart(3,"0");
+  switch(cmd){
+    case "help":
+      printLine("Available commands: help, status, time, clear, about","ok");
+      printLine("These commands only demonstrate the interface.");
+      break;
+    case "status":
+      printLine("Interface: ONLINE | Backend: NOT CONNECTED","ok");
+      printLine("Device control: DISABLED | Remote access: NONE","warn");
+      break;
+    case "time":
+      printLine("Local time: "+new Date().toLocaleString(),"ok");
+      break;
+    case "about":
+      printLine("DEVIL CONTROL WEB UI — Developer: Abdo Saad","ok");
+      break;
+    case "clear":
+      output.innerHTML="";
+      printLine("Console cleared.","ok");
+      break;
+    default:
+      printLine("Unknown demo command. Type help.","warn");
+  }
+}
+document.getElementById("runCommand").addEventListener("click",run);
+input.addEventListener("keydown",e=>{if(e.key==="Enter")run()});
+
+// FILE PICKER — LIST METADATA ONLY, NO UPLOAD
+document.getElementById("fileInput").addEventListener("change",function(){
+  const list=document.getElementById("fileList");
+  list.innerHTML="";
+  Array.from(this.files).forEach(file=>{
+    const row=document.createElement("div");
+    row.textContent="📄 "+file.name+" — "+(file.size/1024).toFixed(1)+" KB";
+    list.appendChild(row);
+  });
+  if(this.files.length){
+    toast("تم اختيار "+this.files.length+" ملف داخل المتصفح فقط.");
+  }
+});
+
+// NAV ACTIVE STATE
+document.querySelectorAll(".nav").forEach(link=>{
+  link.addEventListener("click",()=>{
+    document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));
+    link.classList.add("active");
+  });
+});
+</script>
+</body>
+         </html>
