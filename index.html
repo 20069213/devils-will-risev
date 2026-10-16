@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>DEVILS WILL RISE | Abdo Saad</title><style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#050505;color:#00ff88;
+ font-family:Tahoma,Arial,sans-serif;
+}
+header{
+ padding:25px 15px;text-align:center;
+ background:#080d0b;border-bottom:1px solid #00ff8855;
+}
+h1{
+ color:#00ff88;font-size:clamp(25px,6vw,42px);
+ text-shadow:0 0 15px #00ff8877;
+ margin:10px 0;
+}
+header p{color:#a0b8aa;font-size:13px}
+.badge{
+ display:inline-block;padding:7px 12px;
+ border:1px solid #00ff8877;border-radius:20px;
+ font-size:12px;
+}
+.container{max-width:950px;margin:auto;padding:18px}
+.status{
+ border:1px solid #164b34;background:#07120c;
+ padding:15px;border-radius:10px;margin-bottom:18px;
+}
+.status span{color:#fff}
+.grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+}
+.card{
+ border:1px solid #17472f;background:#080d0a;
+ padding:17px 12px;border-radius:12px;
+ min-height:130px;cursor:pointer;transition:.2s;
+}
+.card:hover{
+ border-color:#00ff88;transform:translateY(-3px);
+ box-shadow:0 0 15px #00ff8822;
+}
+.icon{font-size:28px}
+.card h3{font-size:15px;margin:12px 0 7px}
+.card p{font-size:12px;color:#a0b8aa;line-height:1.7}
+.panel{
+ margin-top:20px;padding:17px;border:1px solid #17472f;
+ border-radius:12px;background:#070b08;
+}
+input,button{
+ width:100%;padding:13px;margin-top:10px;
+ border-radius:7px;font-size:14px;
+}
+input{
+ color:#00ff88;background:#030604;
+ border:1px solid #24543b;direction:ltr;
+}
+button{
+ background:#00ff88;color:#001b0d;border:0;
+ font-weight:bold;cursor:pointer;
+}
+button:hover{background:#a4ffcb}
+#output{
+ background:#020402;color:#00ff88;padding:14px;
+ min-height:100px;margin-top:12px;border-radius:8px;
+ white-space:pre-wrap;overflow-wrap:anywhere;
+ font:13px/1.8 monospace;
+}
+footer{
+ text-align:center;padding:25px 10px;
+ color:#718579;font-size:12px;
+}
+@media(max-width:380px){
+ .grid{grid-template-columns:1fr}
+}
+</style></head><body>
+<header>
+ <span class="badge">CYBER SECURITY PLATFORM</span>
+ <h1>☠ DEVILS WILL RISE ☠</h1>
+ <p>DEVELOPER: ABDO SAAD</p>
+ <p>منصة الأمن السيبراني والتدريب التقني</p>
+</header><main class="container">
+ <section class="status">
+  <strong>● حالة المنصة:</strong>
+  <span> تعمل محلياً داخل المتصفح</span>
+  <p>اختر إحدى الأدوات لبدء الاستخدام.</p>
+ </section> <section class="grid">
+  <article class="card" onclick="showTool('scan')">
+   <div class="icon">🛡️</div>
+   <h3>فحص أمان المواقع</h3>
+   <p>تحقق من استجابة الموقع ومعلومات الاتصال الأساسية.</p>
+  </article>  <article class="card" onclick="showTool('lab')">
+   <div class="icon">🧪</div>
+   <h3>مختبر الاختراق</h3>
+   <p>تدرب على مفاهيم الأمن السيبراني في بيئة تجريبية.</p>
+  </article>  <article class="card" onclick="showTool('devices')">
+   <div class="icon">📱</div>
+   <h3>إدارة الأجهزة</h3>
+   <p>واجهة لتجهيز تسجيل الأجهزة وربطها بموافقة المستخدم.</p>
+  </article>  <article class="card" onclick="showTool('terminal')">
+   <div class="icon">💻</div>
+   <h3>Terminal</h3>
+   <p>واجهة أوامر تجريبية بطابع الهاكر.</p>
+  </article>  <article class="card" onclick="showTool('files')">
+   <div class="icon">📂</div>
+   <h3>مشاركة الملفات</h3>
+   <p>اختر الملفات بنفسك لمعاينة أسمائها قبل مشاركتها.</p>
+  </article>  <article class="card" onclick="showTool('reports')">
+   <div class="icon">📊</div>
+   <h3>التقارير الأمنية</h3>
+   <p>عرض نتائج الأدوات التي تعمل داخل هذه الصفحة.</p>
+  </article>
+ </section> <section class="panel">
+  <h3 id="toolTitle">💻 مركز الأدوات</h3>
+  <p id="toolDescription">اختر أداة من القائمة بالأعلى.</p>
+  <div id="toolArea"></div>
+  <div id="output">DEVILS WILL RISE v1.0
+System ready...
+Waiting for command...</div>
+ </section>
+</main><footer>
+ DEVILS WILL RISE © 2026<br>
+ Developed by Abdo Saad
+</footer><script>
+const output = document.getElementById("output");
+const toolArea = document.getElementById("toolArea");
+const toolTitle = document.getElementById("toolTitle");
+const toolDescription = document.getElementById("toolDescription");
+
+function showTool(tool){
+ toolArea.innerHTML = "";
+
+ const tools = {
+  scan:{
+   title:"🛡️ فحص أمان المواقع",
+   description:"أدخل عنوان موقع تملكه. هذه الأداة تتحقق من صيغة العنوان فقط، وليست ماسح ثغرات فعلياً.",
+   html:'<input id="siteUrl" placeholder="https://example.com"><button onclick="checkUrl()">تحقق من العنوان</button>'
+  },
+  lab:{
+   title:"🧪 مختبر الأمن السيبراني",
+   description:"تعرّف على أساسيات الفحص الآمن.",
+   html:'<button onclick="labDemo()">تشغيل التجربة</button>'
+  },
+  devices:{
+   title:"📱 إدارة الأجهزة",
+   description:"واجهة تجريبية. لا توجد أجهزة متصلة حتى الآن.",
+   html:'<button onclick="deviceDemo()">عرض حالة الربط</button>'
+  },
+  terminal:{
+   title:"💻 Terminal",
+   description:"اكتب أحد الأوامر التجريبية: help أو date أو clear أو status.",
+   html:'<input id="cmd" placeholder="اكتب الأمر هنا"><button onclick="runCommand()">تنفيذ</button>'
+  },
+  files:{
+   title:"📂 مشاركة الملفات",
+   description:"اختر ملفات من جهازك لمعاينة أسمائها. لا يتم رفع الملفات إلى خادم.",
+   html:'<input type="file" id="filePicker" multiple onchange="listFiles()"><button onclick="listFiles()">عرض الملفات المختارة</button>'
+  },
+  reports:{
+   title:"📊 التقارير الأمنية",
+   description:"تقارير الأدوات المتاحة في هذه النسخة.",
+   html:'<button onclick="reportDemo()">عرض التقرير</button>'
+  }
+ };
+
+ const selected = tools[tool];
+ toolTitle.textContent = selected.title;
+ toolDescription.textContent = selected.description;
+ toolArea.innerHTML = selected.html;
+ output.textContent = "Tool loaded successfully.\nReady.";
+}
+
+function checkUrl(){
+ const field = document.getElementById("siteUrl");
+ try{
+  const url = new URL(field.value.trim());
+  if(!["http:","https:"].includes(url.protocol)){
+   throw new Error("Invalid protocol");
+  }
+  output.textContent =
+   "URL FORMAT: VALID\n"+
+   "Hostname: "+url.hostname+
+   "\nProtocol: "+url.protocol+
+   "\n\nهذه ليست نتيجة فحص أمني أو اختبار ثغرات.";
+ }catch(e){
+  output.textContent = "خطأ: أدخل عنواناً صحيحاً يبدأ بـ https://";
+ }
+}
+
+function labDemo(){
+ output.textContent =
+ "CYBERSECURITY LAB\n"+
+ "1. تحديد الأصول\n"+
+ "2. مراجعة إعدادات الأمان\n"+
+ "3. توثيق النتائج\n"+
+ "4. إصلاح المشكلات وإعادة الاختبار\n"+
+ "\nLab simulation completed.";
+}
+
+function deviceDemo(){
+ output.textContent =
+ "DEVICE MANAGEMENT\n"+
+ "Status: No devices paired\n"+
+ "Pairing: Not configured\n"+
+ "\nربط الأجهزة والتحكم فيها يحتاج إلى تطبيق وخادم فعليين وموافقة المستخدم.";
+}
+
+function runCommand(){
+ const field = document.getElementById("cmd");
+ if(!field) return;
+ const command = field.value.trim().toLowerCase();
+
+ const commands = {
+  help:"الأوامر المتاحة: help, date, status, clear",
+  date:"Current time: "+new Date().toLocaleString(),
+  status:"Platform: Online locally\nDevice links: Not configured",
+  clear:""
+ };
+
+ output.textContent = commands[command] ??
+  "أمر غير معروف. اكتب help لعرض الأوامر.";
+}
+
+function listFiles(){
+ const picker = document.getElementById("filePicker");
+ if(!picker) return;
+ output.textContent = picker.files.length
+  ? "الملفات المختارة:\n"+Array.from(picker.files)
+      .map(file=>file.name+" ("+file.size+" bytes)").join("\n")
+  : "لم تختر أي ملفات.";
+}
+
+function reportDemo(){
+ output.textContent =
+ "PLATFORM REPORT\n"+
+ "Web interface: Loaded\n"+
+ "Security scan: Not implemented\n"+
+ "Device pairing: Not implemented\n"+
+ "File transfer server: Not configured\n"+
+ "Training interface: Available";
+}
+</script></body>
+  </html>
