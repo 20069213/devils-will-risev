@@ -2,735 +2,431 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050707">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
 <title>DEVIL CONTROL | Abdo Saad</title>
 
 <style>
 :root{
-  --bg:#050707;
-  --panel:#0a1010;
-  --panel2:#0d1514;
+  --bg:#070909;
+  --panel:#101414;
   --green:#00ff9c;
   --red:#ff2548;
-  --text:#e8fff5;
-  --muted:#7e9990;
-  --border:rgba(0,255,156,.19);
+  --text:#eafff5;
+  --muted:#8a9d95;
+  --border:#193c30;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Tahoma,Arial,sans-serif;
-  overflow-x:hidden;
+  font-family:Arial,Tahoma,sans-serif;
 }
-#matrix{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  opacity:.13;
-  pointer-events:none;
-  z-index:-1;
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.app{min-height:100vh}
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:15px 5%;
-  background:rgba(5,7,7,.92);
+header{
+  padding:20px 16px;
+  background:#090c0b;
   border-bottom:1px solid var(--border);
-  backdrop-filter:blur(14px);
-}
-.brand{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  gap:11px;
-  direction:ltr;
+  gap:10px;
 }
 .logo{
-  width:43px;height:43px;
-  display:grid;place-items:center;
-  border:1px solid var(--green);
   color:var(--green);
-  font-size:24px;
   font-weight:900;
-  box-shadow:0 0 20px #00ff9c25;
-  clip-path:polygon(15% 0,85% 0,100% 20%,100% 80%,85% 100%,15% 100%,0 80%,0 20%);
-}
-.brand h1{
-  font-size:17px;
-  letter-spacing:2px;
-  margin:0;
-}
-.brand small{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
+  font-size:20px;
   letter-spacing:1px;
 }
-.status{
-  direction:ltr;
-  display:flex;align-items:center;gap:8px;
+.online{
   color:var(--green);
   font-size:11px;
 }
-.dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 12px var(--green);
-  animation:pulse 1.5s infinite;
+.container{
+  width:min(1100px,94%);
+  margin:24px auto;
 }
-@keyframes pulse{50%{opacity:.35}}
-.layout{
-  width:min(1400px,94%);
-  margin:25px auto;
-  display:grid;
-  grid-template-columns:230px minmax(0,1fr);
-  gap:20px;
+.hero{
+  border:1px solid #57202b;
+  border-radius:14px;
+  padding:28px 20px;
+  background:
+    radial-gradient(ellipse at top left,#3b111c,transparent 65%),
+    linear-gradient(145deg,#131515,#080909);
 }
-.sidebar,.card{
-  background:linear-gradient(145deg,#0c1312,#070a0a);
-  border:1px solid var(--border);
-  border-radius:12px;
-}
-.sidebar{
-  padding:18px;
-  height:max-content;
-  position:sticky;
-  top:88px;
-}
-.side-title{
-  color:var(--muted);
-  font-size:10px;
+.tag{
+  color:var(--red);
+  font-size:11px;
   letter-spacing:2px;
-  margin:5px 8px 15px;
+}
+h1{
+  direction:ltr;
+  text-align:right;
+  font-size:clamp(27px,6vw,42px);
+  margin:18px 0;
+}
+h1 span{color:var(--green)}
+p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+}
+.section-title{
+  margin:26px 0 14px;
+  font-size:15px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:18px;
+  border-radius:10px;
+  min-width:0;
+}
+.card h3{font-size:14px;margin-top:0}
+.icon{
+  font-size:24px;
+  margin-bottom:12px;
+}
+.btn{
+  display:inline-block;
+  border:1px solid var(--green);
+  color:var(--green);
+  background:#00ff9c0d;
+  padding:12px 15px;
+  border-radius:7px;
+  font-size:12px;
+  cursor:pointer;
+  text-align:center;
+}
+.btn:active{transform:scale(.98)}
+.btn-red{
+  border-color:var(--red);
+  color:var(--red);
+}
+.btn-main{
+  display:block;
+  width:100%;
+  margin-top:18px;
+  font-weight:bold;
+  font-size:14px;
+}
+input[type=text],input[type=file]{
+  width:100%;
+  color:var(--text);
+  background:#080b0a;
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:12px;
+  margin:8px 0;
+}
+label{
+  font-size:12px;
+  color:var(--muted);
+  display:block;
+  margin-top:12px;
+}
+.result{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  background:#050706;
+  color:var(--green);
+  border:1px solid var(--border);
+  padding:13px;
+  border-radius:7px;
+  margin-top:12px;
+  font:12px/1.8 monospace;
   direction:ltr;
   text-align:left;
 }
-.nav{
+.preview img,.preview video{
+  display:block;
+  max-width:100%;
+  max-height:250px;
+  margin:12px auto;
+  border-radius:8px;
+}
+.checkrow{
   display:flex;
-  align-items:center;
   gap:10px;
-  padding:13px 12px;
-  margin:5px 0;
-  border-radius:7px;
-  color:#a8bdb5;
-  font-size:13px;
-  transition:.2s;
+  align-items:flex-start;
+  font-size:12px;
+  line-height:1.8;
+  color:var(--muted);
+  margin:14px 0;
 }
-.nav:hover,.nav.active{
-  color:var(--green);
-  background:#00ff9c0b;
-  border-right:2px solid var(--green);
+.checkrow input{margin-top:5px}
+.notice{
+  background:#ff25480a;
+  border-right:3px solid var(--red);
+  padding:12px;
+  font-size:11px;
+  line-height:1.9;
+  color:#d7aaaF;
+  margin-top:14px;
 }
-.nav span:first-child{font-size:17px}
-.sidebar-bottom{
-  margin-top:25px;
-  padding:14px 10px;
-  border-top:1px solid var(--border);
+footer{
+  text-align:center;
+  padding:28px 10px;
   color:var(--muted);
   font-size:11px;
   line-height:2;
 }
-main{min-width:0}
-.hero{
-  position:relative;
-  padding:28px;
-  min-height:205px;
-  border:1px solid #ff25482b;
-  border-radius:13px;
-  background:
-    radial-gradient(ellipse at 5% 10%,#ff254814,transparent 45%),
-    linear-gradient(120deg,#0d1111,#080a0a);
-  overflow:hidden;
-}
-.hero:after{
-  content:"DC";
-  position:absolute;
-  left:25px;bottom:-35px;
-  font-size:155px;font-weight:900;
-  color:#ffffff04;
-  direction:ltr;
-  pointer-events:none;
-}
-.eyebrow{
-  direction:ltr;
-  text-align:right;
-  color:var(--red);
-  font-size:10px;
-  letter-spacing:3px;
-}
-.hero h2{
-  font-size:clamp(25px,4vw,42px);
-  margin:18px 0 10px;
-  letter-spacing:1px;
-  direction:ltr;
-  text-align:right;
-}
-.hero h2 b{color:var(--green)}
-.hero p{
-  color:#91a69e;
-  line-height:1.9;
-  font-size:13px;
-  max-width:620px;
-}
-.hero-actions{
-  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
-}
-.btn{
-  border:1px solid var(--green);
-  padding:11px 16px;
-  border-radius:6px;
-  background:#00ff9c10;
-  color:var(--green);
-  font-size:12px;
-  transition:.2s;
-}
-.btn:hover{background:var(--green);color:#00170c}
-.btn.red{border-color:var(--red);color:var(--red);background:#ff25480b}
-.btn.red:hover{background:var(--red);color:white}
-.section-title{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;
-  margin:25px 0 13px;
-}
-.section-title h3{
-  font-size:14px;margin:0;
-}
-.section-title small{
-  font-size:10px;color:var(--muted);
-  direction:ltr;
-}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
-}
-.stat{padding:17px}
-.stat .label{font-size:11px;color:var(--muted)}
-.stat .number{
-  font-size:26px;
-  font-weight:bold;
-  margin:13px 0 7px;
-  direction:ltr;
-  text-align:right;
-}
-.green{color:var(--green)}
-.redtext{color:var(--red)}
-.stat small{font-size:10px;color:#698078}
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-.card{padding:18px;min-width:0}
-.card h4{margin:0 0 8px;font-size:13px}
-.sub{font-size:11px;color:var(--muted);line-height:1.8}
-.chart{
-  width:100%;height:145px;display:block;margin-top:15px;
-}
-.bars{
-  display:flex;align-items:end;justify-content:space-around;
-  height:110px;gap:8px;margin-top:20px;
-  border-bottom:1px solid #ffffff15;
-  direction:ltr;
-}
-.bar{
-  flex:1;max-width:35px;
-  background:linear-gradient(to top,#00ff9c22,var(--green));
-  border-radius:4px 4px 0 0;
-  min-height:8px;
-  animation:rise .8s ease-out;
-}
-@keyframes rise{from{height:0}}
-.bar-labels{
-  display:flex;justify-content:space-around;
-  color:var(--muted);font-size:9px;margin-top:8px;direction:ltr;
-}
-.system-list{margin-top:15px}
-.system-row{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:8px;padding:13px 0;border-bottom:1px solid #ffffff0b;
-  font-size:11px;
-}
-.system-row:last-child{border:0}
-.badge{
-  font-size:9px;padding:5px 8px;border-radius:4px;
-  color:var(--green);background:#00ff9c12;
-}
-.badge.red{color:var(--red);background:#ff254812}
-.progress{
-  height:4px;background:#ffffff12;border-radius:8px;
-  margin-top:9px;overflow:hidden;
-}
-.progress span{
-  display:block;height:100%;width:0;
-  background:var(--green);transition:width .6s;
-}
-.terminal{
-  background:#020504;
-  border:1px solid #00ff9c24;
-  border-radius:8px;
-  overflow:hidden;
-  direction:ltr;
-  text-align:left;
-}
-.terminal-head{
-  padding:12px 14px;
-  border-bottom:1px solid #00ff9c18;
-  color:var(--muted);font-size:10px;
-  display:flex;justify-content:space-between;
-}
-.terminal-body{
-  height:175px;overflow:auto;padding:14px;
-  font:12px/1.9 monospace;color:#8fb4a3;
-}
-.terminal-body .ok{color:var(--green)}
-.terminal-body .warn{color:#ffc857}
-.command-row{display:flex;gap:8px;margin-top:12px}
-.command-row input{
-  flex:1;min-width:0;
-  background:#060a08;color:var(--green);
-  border:1px solid var(--border);border-radius:6px;
-  padding:12px;outline:none;direction:ltr;
-}
-.command-row input:focus{border-color:var(--green)}
-.filebox{
-  margin-top:15px;
-  padding:18px;
-  border:1px dashed #00ff9c4d;
-  background:#00ff9c05;
-  border-radius:8px;
-  text-align:center;
-}
-.filebox p{font-size:11px;color:var(--muted);line-height:1.8}
-.filebox input{max-width:100%;font-size:11px;color:var(--muted)}
-.file-list{text-align:left;direction:ltr;font-size:11px;line-height:2;overflow-wrap:anywhere}
-.notice{
-  padding:12px 14px;
-  border-right:3px solid #ffc857;
-  background:#ffc85709;color:#c9b98b;
-  border-radius:4px;font-size:11px;line-height:1.9;
-  margin-top:14px;
-}
-footer{
-  text-align:center;padding:25px 10px 35px;
-  color:#60756c;font-size:10px;line-height:2;
-}
-footer b{color:var(--green)}
-#toast{
-  position:fixed;bottom:20px;left:50%;
-  transform:translateX(-50%);
-  padding:12px 18px;background:#0c1712;
-  border:1px solid var(--green);color:var(--green);
-  border-radius:8px;font-size:12px;
-  z-index:99;display:none;max-width:90%;text-align:center;
-}
-@media(max-width:900px){
-  .layout{grid-template-columns:1fr}
-  .sidebar{position:static;padding:10px;display:flex;gap:5px;overflow-x:auto}
-  .side-title,.sidebar-bottom{display:none}
-  .nav{white-space:nowrap;margin:0;padding:10px;font-size:11px}
-  .nav span:first-child{font-size:14px}
-}
-@media(max-width:600px){
-  .topbar{padding:12px 4%}
-  .brand h1{font-size:14px}
-  .brand small{font-size:8px}
-  .logo{width:37px;height:37px}
-  .status{font-size:9px}
-  .layout{width:94%;margin:14px auto}
-  .hero{padding:20px}
-  .hero h2{font-size:26px}
-  .hero:after{font-size:110px}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .stat{padding:13px}
-  .stat .number{font-size:23px}
-  .grid2{grid-template-columns:1fr}
-  .card{padding:15px}
+footer strong{color:var(--green)}
+@media(max-width:550px){
+  header{padding:16px 12px}
+  .logo{font-size:16px}
+  .container{margin:15px auto}
+  .hero{padding:22px 16px}
+  .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
-<canvas id="matrix"></canvas>
 
-<div class="app">
-<header class="topbar">
-  <div class="brand">
-    <div class="logo">D</div>
-    <div>
-      <h1>DEVIL CONTROL</h1>
-      <small>ABDO SAAD // CONTROL CENTER</small>
+<header>
+  <div>
+    <div class="logo">DEVIL CONTROL</div>
+    <div style="font-size:10px;color:#82958d;margin-top:5px">
+      ABDO SAAD / SECURITY LAB
     </div>
   </div>
-  <div class="status"><span class="dot"></span> INTERFACE ONLINE</div>
+  <div class="online">● INTERFACE ONLINE</div>
 </header>
 
-<div class="layout">
-  <aside class="sidebar">
-    <div class="side-title">MAIN MENU</div>
-    <a class="nav active" href="#overview"><span>◈</span> لوحة القيادة</a>
-    <a class="nav" href="#monitor"><span>▦</span> المراقبة</a>
-    <a class="nav" href="#terminal"><span>⌘</span> شاشة الأوامر</a>
-    <a class="nav" href="#files"><span>⇧</span> الملفات</a>
-    <a class="nav" href="#security"><span>⬡</span> الأمان</a>
-    <div class="sidebar-bottom">
-      DEVELOPER<br>
-      <b style="color:var(--green)">ABDO SAAD</b><br>
-      UI VERSION 2.0<br>
-      LOCAL DEMO MODE
-    </div>
-  </aside>
+<main class="container">
 
-  <main>
-    <section class="hero" id="overview">
-      <div class="eyebrow">ADVANCED INTERFACE / 2026</div>
-      <h2>WELCOME TO <b>DEVIL</b><br>CONTROL CENTER</h2>
+  <section class="hero">
+    <div class="tag">ANDROID PROJECT CENTER / V1.0</div>
+    <h1>DEVIL <span>CONTROL</span></h1>
+    <p>
+      لوحة إدارة مشروع أندرويد تجريبي.
+      جهّز إعدادات المشروع، واختر الملفات التي تريد معاينتها،
+      وراجع خيارات مشاركة البيانات قبل إرسالها.
+    </p>
+    <button class="btn btn-main" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">
+      + CREATE ANDROID PROJECT
+    </button>
+  </section>
+
+  <h2 class="section-title">◈ لوحة التحكم</h2>
+
+  <section class="grid">
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>Android Project</h3>
+      <p>تجهيز إعدادات مشروع التطبيق.</p>
+      <button class="btn" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">
+        فتح إعدادات المشروع
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="icon">📂</div>
+      <h3>File Preview</h3>
+      <p>اختيار صور أو فيديوهات ومعاينتها على جهازك.</p>
+      <button class="btn" onclick="document.getElementById('filePicker').click()">
+        اختيار الملفات
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔐</div>
+      <h3>Privacy Center</h3>
+      <p>مراجعة الموافقة على مشاركة البيانات.</p>
+      <button class="btn" onclick="document.getElementById('consent').scrollIntoView({behavior:'smooth'})">
+        إعدادات الخصوصية
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🖥️</div>
+      <h3>Device Status</h3>
+      <p>حالة الواجهة: تعمل محليًا. خادم الاستقبال غير متصل.</p>
+      <span style="color:var(--red);font-size:11px">BACKEND: NOT CONNECTED</span>
+    </div>
+  </section>
+
+  <section id="builder">
+    <h2 class="section-title">⚙️ إعداد مشروع أندرويد</h2>
+    <div class="card">
+      <label for="appName">اسم التطبيق</label>
+      <input id="appName" type="text" value="Devil Control" maxlength="40">
+
+      <label for="developer">اسم المطور</label>
+      <input id="developer" type="text" value="Abdo Saad" maxlength="60">
+
+      <label for="packageName">معرّف التطبيق</label>
+      <input id="packageName" type="text" value="com.abdosaad.devilcontrol" maxlength="100">
+
+      <button class="btn btn-main" onclick="prepareProject()">
+        تجهيز إعدادات المشروع
+      </button>
+
+      <div id="builderResult" class="result">PROJECT: NOT PREPARED</div>
+
       <p>
-        لوحة تحكم بواجهة سينمائية مستوحاة من أنظمة الأمن السيبراني.
-        استكشف أدوات العرض التجريبية، ومراقبة الواجهة، واختيار الملفات يدويًا.
+        هذه الخطوة تجهز معلومات المشروع فقط.
+        إنشاء APK قابل للتثبيت يحتاج إلى ملفات أندرويد وأداة بناء فعلية.
       </p>
-      <div class="hero-actions">
-        <a href="#monitor" class="btn">◈ عرض لوحة المراقبة</a>
-        <a href="#terminal" class="btn red">⌘ فتح شاشة الأوامر</a>
-      </div>
-    </section>
-
-    <div class="section-title">
-      <h3>◈ مؤشرات النظام</h3>
-      <small id="clock">--:--:--</small>
     </div>
+  </section>
 
-    <section class="stats">
-      <div class="card stat">
-        <div class="label">واجهة النظام</div>
-        <div class="number green">ONLINE</div>
-        <small>الموقع يعمل محليًا</small>
-      </div>
-      <div class="card stat">
-        <div class="label">مستوى الأمان</div>
-        <div class="number green">LOCAL</div>
-        <small>لا يوجد اتصال بأجهزة خارجية</small>
-      </div>
-      <div class="card stat">
-        <div class="label">عمليات تجريبية</div>
-        <div class="number" id="operations">000</div>
-        <small>تفاعلات داخل الصفحة</small>
-      </div>
-      <div class="card stat">
-        <div class="label">حالة الربط</div>
-        <div class="number redtext">OFF</div>
-        <small>الخادم غير متصل</small>
-      </div>
-    </section>
+  <section id="files">
+    <h2 class="section-title">📂 اختيار الملفات ومعاينتها</h2>
+    <div class="card">
+      <p>اختر الملفات بنفسك. لن يتم رفعها إلى خادم من هذه الصفحة.</p>
 
-    <div class="section-title" id="monitor">
-      <h3>▦ المراقبة والتحليلات</h3>
-      <small>DEMO VISUALIZATION</small>
+      <input id="filePicker" type="file" accept="image/*,video/*" multiple>
+
+      <div id="filePreview" class="preview"></div>
     </div>
+  </section>
 
-    <section class="grid2">
-      <div class="card">
-        <h4>نشاط الواجهة</h4>
-        <div class="sub">رسم متحرك تجريبي — وليس بيانات شبكة حقيقية.</div>
-        <canvas id="chart" class="chart"></canvas>
-      </div>
-      <div class="card">
-        <h4>مؤشر النشاط</h4>
-        <div class="sub">قيم مرئية تجريبية تتغير تلقائيًا.</div>
-        <div class="bars" id="bars"></div>
-        <div class="bar-labels">
-          <span>01</span><span>02</span><span>03</span>
-          <span>04</span><span>05</span><span>06</span><span>07</span>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-title">
-      <h3>⬡ حالة الخدمات</h3>
-      <small>LOCAL STATUS</small>
-    </div>
-
-    <section class="grid2" id="security">
-      <div class="card">
-        <h4>حالة المكونات</h4>
-        <div class="system-list">
-          <div class="system-row">
-            <span>واجهة المستخدم</span><span class="badge">READY</span>
-          </div>
-          <div class="system-row">
-            <span>المؤثرات البصرية</span><span class="badge">ACTIVE</span>
-          </div>
-          <div class="system-row">
-            <span>خادم البيانات</span><span class="badge red">NOT CONNECTED</span>
-          </div>
-          <div class="system-row">
-            <span>التحكم بالأجهزة</span><span class="badge red">NOT CONNECTED</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>مؤشرات الواجهة</h4>
-        <div class="system-row"><span>الرسم البصري</span><span id="p1">80%</span></div>
-        <div class="progress"><span id="pb1"></span></div>
-        <div class="system-row"><span>استجابة الواجهة</span><span id="p2">92%</span></div>
-        <div class="progress"><span id="pb2"></span></div>
-        <div class="system-row"><span>حالة العرض</span><span class="badge">NORMAL</span></div>
-        <p class="sub">المؤشرات للعرض فقط، ولا تمثل قياسًا فعليًا للجهاز.</p>
-      </div>
-    </section>
-
-    <div class="section-title" id="terminal">
-      <h3>⌘ شاشة الأوامر</h3>
-      <small>SAFE DEMO TERMINAL</small>
-    </div>
-
-    <section class="card">
-      <div class="terminal">
-        <div class="terminal-head">
-          <span>DEVIL://LOCAL-CONSOLE</span>
-          <span style="color:var(--green)">● READY</span>
-        </div>
-        <div class="terminal-body" id="terminalOutput">
-          <div class="ok">DEVIL CONTROL CONSOLE v2.0</div>
-          <div>Developer: Abdo Saad</div>
-          <div>Mode: Local simulation only</div>
-          <div class="warn">Type "help" to view available demo commands.</div>
-        </div>
-      </div>
-      <div class="command-row">
-        <input id="commandInput" type="text" placeholder="اكتب help ثم اضغط Enter..." autocomplete="off">
-        <button class="btn" id="runCommand">تنفيذ</button>
-      </div>
-      <p class="sub">الأوامر هنا تجريبية داخل الصفحة ولا تنفذ عمليات على أجهزة أو خوادم.</p>
-    </section>
-
-    <div class="section-title" id="files">
-      <h3>⇧ اختيار الملفات</h3>
-      <small>USER-SELECTED FILES</small>
-    </div>
-
-    <section class="card">
-      <h4>اختيار ملفات من جهازك</h4>
-      <p class="sub">
-        اختر الملفات بنفسك لعرض أسمائها وأحجامها داخل الصفحة.
-        لن يتم رفعها إلى الإنترنت أو إرسالها إلى أي شخص.
+  <section id="consent">
+    <h2 class="section-title">🔐 مركز الموافقة والخصوصية</h2>
+    <div class="card">
+      <p>
+        اختر أنواع البيانات التي ترغب في مشاركتها.
+        هذه الاختيارات تسجل موافقتك داخل الصفحة فقط؛
+        لا يوجد خادم متصل حاليًا ولا يتم إرسال بيانات تلقائيًا.
       </p>
-      <div class="filebox">
-        <p>📁 اختر الصور أو الفيديوهات أو الملفات التي تريد عرضها</p>
-        <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf,.txt">
-        <div class="file-list" id="fileList"></div>
-      </div>
+
+      <label class="checkrow">
+        <input type="checkbox" id="allowPhotos">
+        <span>أوافق على اختيار الصور التي أحددها بنفسي لمشاركتها.</span>
+      </label>
+
+      <label class="checkrow">
+        <input type="checkbox" id="allowVideos">
+        <span>أوافق على اختيار الفيديوهات التي أحددها بنفسي لمشاركتها.</span>
+      </label>
+
+      <label class="checkrow">
+        <input type="checkbox" id="allowContacts">
+        <span>أرغب في مشاركة جهات اتصال أختارها بنفسي، إذا أتاح التطبيق ذلك ووافقت على صلاحياته.</span>
+      </label>
+
+      <button class="btn btn-main" onclick="saveConsent()">
+        حفظ اختيارات الموافقة
+      </button>
+
+      <div id="consentResult" class="result">CONSENT: NOT SET</div>
+
       <div class="notice">
-        تنبيه: هذه الصفحة واجهة ويب فقط. لا يمكنها الوصول إلى الملفات أو جهات الاتصال
-        أو التحكم عن بُعد في هاتف آخر دون آلية موثوقة وصلاحيات وموافقة واضحة.
-        رفع الملفات إلى خادم يحتاج إلى خادم فعلي وإجراء يوافق عليه المستخدم.
+        الموافقة هنا لا تمنح الموقع صلاحية قراءة جهات الاتصال أو الملفات تلقائيًا.
+        أي مشاركة فعلية تحتاج إلى اختيار المستخدم، والصلاحيات المناسبة،
+        وخادم آمن، وتأكيد واضح قبل الإرسال.
       </div>
-    </section>
-
-    <div class="section-title">
-      <h3>◈ معلومات المشروع</h3>
-      <small>ABOUT</small>
     </div>
+  </section>
 
-    <section class="card">
-      <div class="system-list">
-        <div class="system-row"><span>اسم المشروع</span><span class="green">DEVIL CONTROL</span></div>
-        <div class="system-row"><span>المطور</span><span>Abdo Saad</span></div>
-        <div class="system-row"><span>الإصدار</span><span>2.0 WEB</span></div>
-        <div class="system-row"><span>نوع المشروع</span><span>واجهة تفاعلية تجريبية</span></div>
-      </div>
-    </section>
-  </main>
-</div>
+  <section>
+    <h2 class="section-title">⌘ سجل الواجهة</h2>
+    <div class="card">
+      <div id="terminal" class="result">DEVIL CONTROL WEB
+Developer: Abdo Saad
+Interface: ONLINE
+Android build service: NOT CONNECTED
+Data transfer server: NOT CONNECTED</div>
+      <button class="btn" style="margin-top:12px" onclick="addLog()">
+        فحص حالة الواجهة
+      </button>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <b>DEVIL CONTROL</b> — Designed by Abdo Saad<br>
-  واجهة تعليمية وتجريبية، ولا تمثل نظام مراقبة أو تحكم فعليًا.
+  <strong>DEVIL CONTROL</strong><br>
+  Designed by Abdo Saad<br>
+  واجهة تجريبية — لا تجمع بيانات سرًا ولا ترسلها تلقائيًا.
 </footer>
-</div>
-
-<div id="toast"></div>
 
 <script>
-// MATRIX BACKGROUND
-const matrix = document.getElementById("matrix");
-const mctx = matrix.getContext("2d");
-let drops = [];
-function resizeMatrix(){
-  matrix.width = window.innerWidth;
-  matrix.height = window.innerHeight;
-  drops = Array(Math.ceil(matrix.width/16)).fill(1);
-}
-resizeMatrix();
-window.addEventListener("resize",resizeMatrix);
-function drawMatrix(){
-  mctx.fillStyle="rgba(5,7,7,0.08)";
-  mctx.fillRect(0,0,matrix.width,matrix.height);
-  mctx.fillStyle="#00ff9c";
-  mctx.font="14px monospace";
-  drops.forEach((y,i)=>{
-    const char=String.fromCharCode(0x30A0+Math.random()*96);
-    mctx.fillText(char,i*16,y*16);
-    if(y*16>matrix.height && Math.random()>.975) drops[i]=0;
-    drops[i]++;
-  });
-}
-setInterval(drawMatrix,65);
+function prepareProject(){
+  const appName=document.getElementById("appName").value.trim();
+  const developer=document.getElementById("developer").value.trim();
+  const packageName=document.getElementById("packageName").value.trim();
+  const result=document.getElementById("builderResult");
 
-// CLOCK
-function updateClock(){
-  document.getElementById("clock").textContent =
-    new Date().toLocaleTimeString("en-GB");
-}
-updateClock();
-setInterval(updateClock,1000);
-
-// DEMO BARS
-const barsBox=document.getElementById("bars");
-function makeBars(){
-  barsBox.innerHTML="";
-  for(let i=0;i<7;i++){
-    const bar=document.createElement("div");
-    bar.className="bar";
-    bar.style.height=(15+Math.random()*80)+"%";
-    barsBox.appendChild(bar);
+  if(!appName||!developer||!packageName){
+    result.textContent="ERROR: املأ جميع الحقول أولًا.";
+    return;
   }
-}
-makeBars();
-setInterval(makeBars,2500);
 
-// CHART
-const chart=document.getElementById("chart");
-const cctx=chart.getContext("2d");
-let values=Array.from({length:32},()=>30+Math.random()*60);
-function drawChart(){
-  const dpr=window.devicePixelRatio||1;
-  const w=chart.clientWidth,h=chart.clientHeight;
-  chart.width=w*dpr;chart.height=h*dpr;
-  cctx.setTransform(dpr,0,0,dpr,0,0);
-  cctx.clearRect(0,0,w,h);
-  cctx.strokeStyle="rgba(0,255,156,.12)";
-  cctx.lineWidth=1;
-  for(let y=10;y<h;y+=30){
-    cctx.beginPath();cctx.moveTo(0,y);cctx.lineTo(w,y);cctx.stroke();
+  if(!/^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$/.test(packageName)){
+    result.textContent="ERROR: معرّف التطبيق غير صالح. مثال: com.abdosaad.myapp";
+    return;
   }
-  values.push(30+Math.random()*60);values.shift();
-  cctx.beginPath();
-  values.forEach((v,i)=>{
-    const x=i/(values.length-1)*w;
-    const y=h-(v/100)*(h-12)-5;
-    if(i===0)cctx.moveTo(x,y);else cctx.lineTo(x,y);
-  });
-  cctx.strokeStyle="#00ff9c";cctx.lineWidth=2;cctx.stroke();
-  cctx.lineTo(w,h);cctx.lineTo(0,h);cctx.closePath();
-  cctx.fillStyle="rgba(0,255,156,.07)";cctx.fill();
-}
-drawChart();
-setInterval(drawChart,800);
-window.addEventListener("resize",drawChart);
 
-// DEMO METRICS
-function randomMetric(id,labelId,min,max){
-  const value=Math.floor(min+Math.random()*(max-min));
-  document.getElementById(id).style.width=value+"%";
-  document.getElementById(labelId).textContent=value+"%";
-}
-setInterval(()=>{
-  randomMetric("pb1","p1",65,99);
-  randomMetric("pb2","p2",75,100);
-},3000);
-randomMetric("pb1","p1",65,99);
-randomMetric("pb2","p2",75,100);
-
-// TOAST
-function toast(message){
-  const el=document.getElementById("toast");
-  el.textContent=message;el.style.display="block";
-  clearTimeout(window.toastTimer);
-  window.toastTimer=setTimeout(()=>el.style.display="none",2600);
+  result.textContent=
+    "PROJECT SETTINGS PREPARED\n"+
+    "App: "+appName+"\n"+
+    "Developer: "+developer+"\n"+
+    "Package: "+packageName+"\n"+
+    "Build: NOT RUN\n"+
+    "APK: NOT CREATED\n\n"+
+    "الخطوة التالية: بناء مشروع أندرويد بأداة بناء مناسبة.";
 }
 
-// TERMINAL — SAFE LOCAL COMMANDS ONLY
-let operationCount=0;
-const output=document.getElementById("terminalOutput");
-const input=document.getElementById("commandInput");
-function printLine(text,className=""){
-  const line=document.createElement("div");
-  line.textContent=text;
-  if(className)line.className=className;
-  output.appendChild(line);
-  output.scrollTop=output.scrollHeight;
-}
-function run(){
-  const cmd=input.value.trim().toLowerCase();
-  if(!cmd)return;
-  printLine("visitor@devil:~$ "+cmd);
-  input.value="";
-  operationCount++;
-  document.getElementById("operations").textContent=
-    String(operationCount).padStart(3,"0");
-  switch(cmd){
-    case "help":
-      printLine("Available commands: help, status, time, clear, about","ok");
-      printLine("These commands only demonstrate the interface.");
-      break;
-    case "status":
-      printLine("Interface: ONLINE | Backend: NOT CONNECTED","ok");
-      printLine("Device control: DISABLED | Remote access: NONE","warn");
-      break;
-    case "time":
-      printLine("Local time: "+new Date().toLocaleString(),"ok");
-      break;
-    case "about":
-      printLine("DEVIL CONTROL WEB UI — Developer: Abdo Saad","ok");
-      break;
-    case "clear":
-      output.innerHTML="";
-      printLine("Console cleared.","ok");
-      break;
-    default:
-      printLine("Unknown demo command. Type help.","warn");
-  }
-}
-document.getElementById("runCommand").addEventListener("click",run);
-input.addEventListener("keydown",e=>{if(e.key==="Enter")run()});
+document.getElementById("filePicker").addEventListener("change",function(){
+  const preview=document.getElementById("filePreview");
+  preview.replaceChildren();
 
-// FILE PICKER — LIST METADATA ONLY, NO UPLOAD
-document.getElementById("fileInput").addEventListener("change",function(){
-  const list=document.getElementById("fileList");
-  list.innerHTML="";
-  Array.from(this.files).forEach(file=>{
-    const row=document.createElement("div");
-    row.textContent="📄 "+file.name+" — "+(file.size/1024).toFixed(1)+" KB";
-    list.appendChild(row);
-  });
-  if(this.files.length){
-    toast("تم اختيار "+this.files.length+" ملف داخل المتصفح فقط.");
+  for(const file of this.files){
+    const item=document.createElement("div");
+    item.className="card";
+    item.style.marginTop="12px";
+
+    const name=document.createElement("p");
+    name.textContent=file.name+" — "+(file.size/1024).toFixed(1)+" KB";
+    item.appendChild(name);
+
+    if(file.type.startsWith("image/")){
+      const img=document.createElement("img");
+      img.src=URL.createObjectURL(file);
+      img.alt="معاينة الصورة المحددة";
+      item.appendChild(img);
+    }else if(file.type.startsWith("video/")){
+      const video=document.createElement("video");
+      video.src=URL.createObjectURL(file);
+      video.controls=true;
+      item.appendChild(video);
+    }
+
+    preview.appendChild(item);
   }
 });
 
-// NAV ACTIVE STATE
-document.querySelectorAll(".nav").forEach(link=>{
-  link.addEventListener("click",()=>{
-    document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));
-    link.classList.add("active");
-  });
-});
+function saveConsent(){
+  const choices=[];
+  if(document.getElementById("allowPhotos").checked) choices.push("Photos: user-selected");
+  if(document.getElementById("allowVideos").checked) choices.push("Videos: user-selected");
+  if(document.getElementById("allowContacts").checked) choices.push("Contacts: explicit selection required");
+
+  document.getElementById("consentResult").textContent=
+    "CONSENT PREFERENCES SAVED IN THIS PAGE\n"+
+    (choices.length?choices.join("\n"):"No data types selected")+
+    "\n\nNo data has been uploaded.";
+}
+
+function addLog(){
+  document.getElementById("terminal").textContent=
+    "DEVIL CONTROL WEB\n"+
+    "Developer: Abdo Saad\n"+
+    "Interface: ONLINE\n"+
+    "Local file preview: AVAILABLE\n"+
+    "Android build service: NOT CONNECTED\n"+
+    "Data transfer server: NOT CONNECTED\n"+
+    "Check time: "+new Date().toLocaleString();
+}
 </script>
+
 </body>
-         </html>
+</html>
