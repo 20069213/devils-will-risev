@@ -1,246 +1,363 @@
 <!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050505">
-<title>DEVILS WILL RISE | Abdo Saad</title><style>
+<title>DEVILS WILL RISE | Abdo Saad</title>
+<style>
+:root{
+ --bg:#050505;--panel:#0b0d0c;--green:#00ff88;
+ --red:#ff2345;--text:#e9fff1;--muted:#8aa398;
+ --border:#17452e;
+}
 *{box-sizing:border-box}
 body{
- margin:0;background:#050505;color:#00ff88;
+ margin:0;background:var(--bg);color:var(--text);
  font-family:Tahoma,Arial,sans-serif;
 }
+#matrix{
+ position:fixed;inset:0;width:100%;height:100%;
+ opacity:.13;pointer-events:none;z-index:-1
+}
 header{
- padding:25px 15px;text-align:center;
- background:#080d0b;border-bottom:1px solid #00ff8855;
+ padding:22px 15px;text-align:center;
+ border-bottom:1px solid var(--border);
+ background:#050807eF;
 }
-h1{
- color:#00ff88;font-size:clamp(25px,6vw,42px);
- text-shadow:0 0 15px #00ff8877;
- margin:10px 0;
+.logo{
+ font-size:clamp(24px,6vw,42px);font-weight:900;
+ color:var(--green);text-shadow:0 0 18px #00ff8877;
+ margin:10px 0
 }
-header p{color:#a0b8aa;font-size:13px}
-.badge{
- display:inline-block;padding:7px 12px;
- border:1px solid #00ff8877;border-radius:20px;
- font-size:12px;
+.subtitle{color:var(--muted);font-size:12px;line-height:2}
+.pill{
+ display:inline-block;border:1px solid var(--red);
+ color:var(--red);border-radius:30px;padding:6px 12px;
+ font-size:11px;letter-spacing:1px
 }
-.container{max-width:950px;margin:auto;padding:18px}
-.status{
- border:1px solid #164b34;background:#07120c;
- padding:15px;border-radius:10px;margin-bottom:18px;
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);
+ max-width:1250px;margin:auto;min-height:75vh}
+aside{padding:15px;border-left:1px solid var(--border)}
+nav button{
+ display:block;text-align:right;width:100%;margin:6px 0;
+ background:transparent;color:var(--text);
+ border:1px solid transparent;padding:13px;border-radius:8px;
+ cursor:pointer
 }
-.status span{color:#fff}
-.grid{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
- gap:12px;
+nav button:hover,nav button.active{
+ border-color:var(--green);background:#00ff8810;color:var(--green)
 }
-.card{
- border:1px solid #17472f;background:#080d0a;
- padding:17px 12px;border-radius:12px;
- min-height:130px;cursor:pointer;transition:.2s;
+main{padding:20px;min-width:0}
+h2{font-size:22px;color:var(--green);margin-top:0}
+h3{font-size:15px}
+p{line-height:1.8}
+.muted{color:var(--muted);font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.card,.panel{
+ border:1px solid var(--border);background:#090d0bf2;
+ padding:17px;border-radius:12px;min-width:0
 }
-.card:hover{
- border-color:#00ff88;transform:translateY(-3px);
- box-shadow:0 0 15px #00ff8822;
+.card{cursor:pointer;transition:.2s}
+.card:hover{border-color:var(--green);transform:translateY(-2px)}
+.icon{font-size:27px}
+.card p{font-size:12px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;margin-bottom:17px}
+.stat{border:1px solid var(--border);padding:13px;border-radius:9px;
+ background:#080b09}
+.stat strong{display:block;color:var(--green);font-size:22px;margin-bottom:6px}
+.stat span{font-size:11px;color:var(--muted)}
+.panel{margin-bottom:15px}
+input,textarea,select{
+ width:100%;background:#030604;border:1px solid #28513a;
+ color:var(--text);padding:12px;border-radius:7px;margin:8px 0;
+ font:inherit
 }
-.icon{font-size:28px}
-.card h3{font-size:15px;margin:12px 0 7px}
-.card p{font-size:12px;color:#a0b8aa;line-height:1.7}
-.panel{
- margin-top:20px;padding:17px;border:1px solid #17472f;
- border-radius:12px;background:#070b08;
+input[type=file]{font-size:12px}
+button.action{
+ padding:12px 15px;background:var(--green);color:#001b0d;
+ font-weight:bold;border:0;border-radius:7px;cursor:pointer;
+ margin:5px 0
 }
-input,button{
- width:100%;padding:13px;margin-top:10px;
- border-radius:7px;font-size:14px;
+button.secondary{background:#171b19;color:var(--text);
+ border:1px solid var(--border)}
+button.danger{background:#351017;color:#ff8a9b;
+ border:1px solid var(--red)}
+button:focus-visible,input:focus-visible{
+ outline:2px solid var(--green);outline-offset:2px
 }
-input{
- color:#00ff88;background:#030604;
- border:1px solid #24543b;direction:ltr;
-}
-button{
- background:#00ff88;color:#001b0d;border:0;
- font-weight:bold;cursor:pointer;
-}
-button:hover{background:#a4ffcb}
-#output{
- background:#020402;color:#00ff88;padding:14px;
- min-height:100px;margin-top:12px;border-radius:8px;
+.output{
  white-space:pre-wrap;overflow-wrap:anywhere;
- font:13px/1.8 monospace;
+ background:#020403;border-right:3px solid var(--green);
+ color:var(--green);padding:14px;border-radius:5px;
+ min-height:85px;font:12px/1.9 monospace
 }
-footer{
- text-align:center;padding:25px 10px;
- color:#718579;font-size:12px;
+.ltr{direction:ltr;text-align:left}
+.hidden{display:none!important}
+.tag{color:var(--green);font-size:11px}
+.warning{color:#ff9aa8;font-size:12px}
+footer{text-align:center;border-top:1px solid var(--border);
+ padding:23px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+ .layout{grid-template-columns:1fr}
+ aside{border-left:0;border-bottom:1px solid var(--border);padding:8px}
+ nav{display:flex;gap:6px;overflow-x:auto}
+ nav button{white-space:nowrap;width:auto;min-width:max-content;
+ padding:10px;font-size:12px}
+ main{padding:13px}
+ .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .stat{padding:9px 5px}
+ .stat strong{font-size:18px}
+ .stat span{font-size:10px}
 }
-@media(max-width:380px){
- .grid{grid-template-columns:1fr}
+@media(max-width:380px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="matrix" aria-hidden="true"></canvas><header>
+ <span class="pill">CYBER SECURITY INTERFACE</span>
+ <div class="logo">☠ DEVILS WILL RISE ☠</div>
+ <div class="subtitle">
+  DEVELOPER: ABDO SAAD<br>
+  منصة الأمن السيبراني والتدريب التقني
+ </div>
+</header><div class="layout">
+<aside>
+ <nav id="nav">
+  <button class="active" data-page="home">⌂ Dashboard</button>
+  <button data-page="scanner">🛡 Security Scanner</button>
+  <button data-page="lab">🧪 Cyber Lab</button>
+  <button data-page="terminal">⌘ Terminal</button>
+  <button data-page="devices">▣ Device Manager</button>
+  <button data-page="files">⇧ File Transfer</button>
+  <button data-page="reports">▤ Reports</button>
+  <button data-page="about">⚙ About</button>
+ </nav>
+</aside><main>
+<section id="page-home" class="page">
+ <h2>لوحة التحكم / Dashboard</h2>
+ <p class="muted">مرحبًا بك في مركز DEVILS WILL RISE الأمني.</p>
+ <div class="stats">
+  <div class="stat"><strong id="uptime">ONLINE</strong><span>واجهة الموقع</span></div>
+  <div class="stat"><strong>06</strong><span>أدوات الواجهة</span></div>
+  <div class="stat"><strong id="clock">--:--</strong><span>الوقت المحلي</span></div>
+ </div>
+ <div class="cards">
+  <div class="card" data-open="scanner"><div class="icon">🛡️</div>
+   <h3>Security Scanner</h3><p>التحقق من عنوان موقع وإرشادات الأمان.</p></div>
+  <div class="card" data-open="lab"><div class="icon">🧪</div>
+   <h3>Cyber Lab</h3><p>تدريب على خطوات اختبار الأمان.</p></div>
+  <div class="card" data-open="terminal"><div class="icon">💻</div>
+   <h3>Terminal</h3><p>أوامر تدريبية داخل المتصفح.</p></div>
+  <div class="card" data-open="devices"><div class="icon">📱</div>
+   <h3>Device Manager</h3><p>عرض حالة الربط بالأجهزة.</p></div>
+  <div class="card" data-open="files"><div class="icon">📂</div>
+   <h3>File Transfer</h3><p>اختيار ملفات محليًا لمعاينة أسمائها.</p></div>
+  <div class="card" data-open="reports"><div class="icon">📊</div>
+   <h3>Reports</h3><p>ملخص حالة أدوات هذه النسخة.</p></div>
+ </div>
+</section><section id="page-scanner" class="page hidden">
+ <h2>🛡 Security Scanner</h2>
+ <div class="panel">
+  <p>أدخل عنوان موقع تملكه أو لديك إذن بفحصه.</p>
+  <input id="urlInput" class="ltr" type="url" placeholder="https://example.com">
+  <button class="action" id="checkUrl">تحقق من العنوان</button>
+  <div class="output" id="scanOutput">بانتظار عنوان الموقع...</div>
+  <p class="muted">هذه النسخة تتحقق من صيغة العنوان فقط، ولا تدّعي اكتشاف الثغرات.</p>
+ </div>
+ <div class="panel">
+  <h3>قائمة مراجعة أمنية</h3>
+  <ul class="muted">
+   <li>استخدام HTTPS.</li><li>تحديث البرمجيات.</li>
+   <li>تفعيل المصادقة متعددة العوامل.</li>
+   <li>تقييد الصلاحيات والاحتفاظ بنسخ احتياطية.</li>
+  </ul>
+ </div>
+</section><section id="page-lab" class="page hidden">
+ <h2>🧪 Cyber Lab</h2>
+ <div class="panel">
+  <p>مختبر تدريبي لتعلّم منهجية اختبار الأمان.</p>
+  <button class="action" id="startLab">بدء التدريب</button>
+  <div class="output" id="labOutput">LAB READY</div>
+ </div>
+</section><section id="page-terminal" class="page hidden">
+ <h2>💻 Terminal</h2>
+ <div class="panel">
+  <p class="muted">هذه وحدة أوامر تدريبية. لا تنفّذ أوامر نظام التشغيل.</p>
+  <div class="output" id="terminalOutput">DEVILS WILL RISE TERMINAL v1.0
+اكتب help لعرض الأوامر.</div>
+  <input id="commandInput" class="ltr" placeholder="help">
+  <button class="action" id="runCommand">Run Command</button>
+  <button class="action secondary" id="clearTerminal">Clear</button>
+ </div>
+</section><section id="page-devices" class="page hidden">
+ <h2>📱 Device Manager</h2>
+ <div class="panel">
+  <h3>حالة ربط الأجهزة</h3>
+  <div class="output" id="deviceOutput">لا توجد أجهزة مرتبطة.
+Pairing server: Not configured</div>
+  <button class="action" id="deviceStatus">تحديث الحالة</button>
+  <p class="warning">هذه الواجهة لا تتصل بالأجهزة تلقائيًا. يلزم تطبيق أندرويد وخادم فعلي، مع موافقة صاحب الجهاز.</p>
+ </div>
+</section><section id="page-files" class="page hidden">
+ <h2>📂 File Transfer</h2>
+ <div class="panel">
+  <p>اختر الملفات التي تريد معاينة أسمائها على جهازك.</p>
+  <input type="file" id="fileInput" multiple>
+  <button class="action" id="listFiles">عرض الملفات المختارة</button>
+  <div class="output" id="fileOutput">لم يتم اختيار ملفات.</div>
+  <p class="muted">الملفات لا تُرفع إلى الإنترنت في هذه النسخة.</p>
+ </div>
+</section><section id="page-reports" class="page hidden">
+ <h2>📊 Reports</h2>
+ <div class="panel">
+  <button class="action" id="makeReport">إنشاء تقرير حالة</button>
+  <button class="action secondary" id="downloadReport">تنزيل التقرير النصي</button>
+  <div class="output" id="reportOutput">لم يتم إنشاء التقرير بعد.</div>
+ </div>
+</section><section id="page-about" class="page hidden">
+ <h2>⚙ About</h2>
+ <div class="panel">
+  <h3>DEVILS WILL RISE</h3>
+  <p>Developed by Abdo Saad</p>
+  <p class="muted">واجهة أمن سيبراني وتدريب تقني. لا تحتوي هذه النسخة على خادم خلفي أو نظام تحكم بالأجهزة.</p>
+  <p class="tag">VERSION 1.0.0</p>
+ </div>
+</section>
+</main>
+</div><footer>DEVILS WILL RISE © 2026 — Developed by Abdo Saad</footer><script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const pages = [...document.querySelectorAll(".page")];
+
+function openPage(name){
+ pages.forEach(p=>p.classList.toggle("hidden",p.id!=="page-"+name));
+ document.querySelectorAll("#nav button").forEach(b=>
+  b.classList.toggle("active",b.dataset.page===name));
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-</style></head><body>
-<header>
- <span class="badge">CYBER SECURITY PLATFORM</span>
- <h1>☠ DEVILS WILL RISE ☠</h1>
- <p>DEVELOPER: ABDO SAAD</p>
- <p>منصة الأمن السيبراني والتدريب التقني</p>
-</header><main class="container">
- <section class="status">
-  <strong>● حالة المنصة:</strong>
-  <span> تعمل محلياً داخل المتصفح</span>
-  <p>اختر إحدى الأدوات لبدء الاستخدام.</p>
- </section> <section class="grid">
-  <article class="card" onclick="showTool('scan')">
-   <div class="icon">🛡️</div>
-   <h3>فحص أمان المواقع</h3>
-   <p>تحقق من استجابة الموقع ومعلومات الاتصال الأساسية.</p>
-  </article>  <article class="card" onclick="showTool('lab')">
-   <div class="icon">🧪</div>
-   <h3>مختبر الاختراق</h3>
-   <p>تدرب على مفاهيم الأمن السيبراني في بيئة تجريبية.</p>
-  </article>  <article class="card" onclick="showTool('devices')">
-   <div class="icon">📱</div>
-   <h3>إدارة الأجهزة</h3>
-   <p>واجهة لتجهيز تسجيل الأجهزة وربطها بموافقة المستخدم.</p>
-  </article>  <article class="card" onclick="showTool('terminal')">
-   <div class="icon">💻</div>
-   <h3>Terminal</h3>
-   <p>واجهة أوامر تجريبية بطابع الهاكر.</p>
-  </article>  <article class="card" onclick="showTool('files')">
-   <div class="icon">📂</div>
-   <h3>مشاركة الملفات</h3>
-   <p>اختر الملفات بنفسك لمعاينة أسمائها قبل مشاركتها.</p>
-  </article>  <article class="card" onclick="showTool('reports')">
-   <div class="icon">📊</div>
-   <h3>التقارير الأمنية</h3>
-   <p>عرض نتائج الأدوات التي تعمل داخل هذه الصفحة.</p>
-  </article>
- </section> <section class="panel">
-  <h3 id="toolTitle">💻 مركز الأدوات</h3>
-  <p id="toolDescription">اختر أداة من القائمة بالأعلى.</p>
-  <div id="toolArea"></div>
-  <div id="output">DEVILS WILL RISE v1.0
-System ready...
-Waiting for command...</div>
- </section>
-</main><footer>
- DEVILS WILL RISE © 2026<br>
- Developed by Abdo Saad
-</footer><script>
-const output = document.getElementById("output");
-const toolArea = document.getElementById("toolArea");
-const toolTitle = document.getElementById("toolTitle");
-const toolDescription = document.getElementById("toolDescription");
+document.querySelectorAll("#nav button").forEach(b=>
+ b.addEventListener("click",()=>openPage(b.dataset.page)));
+document.querySelectorAll("[data-open]").forEach(c=>
+ c.addEventListener("click",()=>openPage(c.dataset.open)));
 
-function showTool(tool){
- toolArea.innerHTML = "";
-
- const tools = {
-  scan:{
-   title:"🛡️ فحص أمان المواقع",
-   description:"أدخل عنوان موقع تملكه. هذه الأداة تتحقق من صيغة العنوان فقط، وليست ماسح ثغرات فعلياً.",
-   html:'<input id="siteUrl" placeholder="https://example.com"><button onclick="checkUrl()">تحقق من العنوان</button>'
-  },
-  lab:{
-   title:"🧪 مختبر الأمن السيبراني",
-   description:"تعرّف على أساسيات الفحص الآمن.",
-   html:'<button onclick="labDemo()">تشغيل التجربة</button>'
-  },
-  devices:{
-   title:"📱 إدارة الأجهزة",
-   description:"واجهة تجريبية. لا توجد أجهزة متصلة حتى الآن.",
-   html:'<button onclick="deviceDemo()">عرض حالة الربط</button>'
-  },
-  terminal:{
-   title:"💻 Terminal",
-   description:"اكتب أحد الأوامر التجريبية: help أو date أو clear أو status.",
-   html:'<input id="cmd" placeholder="اكتب الأمر هنا"><button onclick="runCommand()">تنفيذ</button>'
-  },
-  files:{
-   title:"📂 مشاركة الملفات",
-   description:"اختر ملفات من جهازك لمعاينة أسمائها. لا يتم رفع الملفات إلى خادم.",
-   html:'<input type="file" id="filePicker" multiple onchange="listFiles()"><button onclick="listFiles()">عرض الملفات المختارة</button>'
-  },
-  reports:{
-   title:"📊 التقارير الأمنية",
-   description:"تقارير الأدوات المتاحة في هذه النسخة.",
-   html:'<button onclick="reportDemo()">عرض التقرير</button>'
-  }
- };
-
- const selected = tools[tool];
- toolTitle.textContent = selected.title;
- toolDescription.textContent = selected.description;
- toolArea.innerHTML = selected.html;
- output.textContent = "Tool loaded successfully.\nReady.";
+function updateClock(){
+ $("clock").textContent=new Date().toLocaleTimeString([],{
+  hour:"2-digit",minute:"2-digit"
+ });
 }
+updateClock();
+setInterval(updateClock,15000);
 
-function checkUrl(){
- const field = document.getElementById("siteUrl");
+$("checkUrl").addEventListener("click",()=>{
+ const value=$("urlInput").value.trim();
  try{
-  const url = new URL(field.value.trim());
-  if(!["http:","https:"].includes(url.protocol)){
-   throw new Error("Invalid protocol");
-  }
-  output.textContent =
+  const u=new URL(value);
+  if(!["https:","http:"].includes(u.protocol))throw Error();
+  $("scanOutput").textContent=
    "URL FORMAT: VALID\n"+
-   "Hostname: "+url.hostname+
-   "\nProtocol: "+url.protocol+
-   "\n\nهذه ليست نتيجة فحص أمني أو اختبار ثغرات.";
- }catch(e){
-  output.textContent = "خطأ: أدخل عنواناً صحيحاً يبدأ بـ https://";
+   "Hostname: "+u.hostname+
+   "\nProtocol: "+u.protocol+
+   "\n\nلم يتم إجراء فحص ثغرات أو اتصال بالخادم.";
+ }catch{
+  $("scanOutput").textContent="خطأ: أدخل عنوانًا صحيحًا يبدأ بـ https://";
  }
-}
+});
 
-function labDemo(){
- output.textContent =
- "CYBERSECURITY LAB\n"+
- "1. تحديد الأصول\n"+
- "2. مراجعة إعدادات الأمان\n"+
- "3. توثيق النتائج\n"+
- "4. إصلاح المشكلات وإعادة الاختبار\n"+
- "\nLab simulation completed.";
-}
+$("startLab").addEventListener("click",()=>{
+ $("labOutput").textContent=
+ "CYBER LAB — TRAINING\n"+
+ "01. Identify assets and scope.\n"+
+ "02. Review security configuration.\n"+
+ "03. Document findings.\n"+
+ "04. Prioritize and fix issues.\n"+
+ "05. Retest and prepare a report.\n"+
+ "\nTraining checklist completed.";
+});
 
-function deviceDemo(){
- output.textContent =
- "DEVICE MANAGEMENT\n"+
- "Status: No devices paired\n"+
- "Pairing: Not configured\n"+
- "\nربط الأجهزة والتحكم فيها يحتاج إلى تطبيق وخادم فعليين وموافقة المستخدم.";
-}
-
-function runCommand(){
- const field = document.getElementById("cmd");
- if(!field) return;
- const command = field.value.trim().toLowerCase();
-
- const commands = {
-  help:"الأوامر المتاحة: help, date, status, clear",
-  date:"Current time: "+new Date().toLocaleString(),
-  status:"Platform: Online locally\nDevice links: Not configured",
-  clear:""
+function runTerminal(){
+ const input=$("commandInput").value.trim();
+ const cmd=input.toLowerCase();
+ const answers={
+  help:"Available commands: help, date, status, about, clear",
+  date:"Local time: "+new Date().toLocaleString(),
+  status:"Web interface: online\nBackend server: not configured\nDevice pairing: not configured",
+  about:"DEVILS WILL RISE — Developed by Abdo Saad"
  };
-
- output.textContent = commands[command] ??
-  "أمر غير معروف. اكتب help لعرض الأوامر.";
+ if(cmd==="clear"){$("terminalOutput").textContent="Terminal cleared.";return;}
+ $("terminalOutput").textContent=answers[cmd]||
+  "Unknown command: "+input+"\nType help to list available commands.";
 }
+$("runCommand").addEventListener("click",runTerminal);
+$("commandInput").addEventListener("keydown",e=>{
+ if(e.key==="Enter")runTerminal();
+});
+$("clearTerminal").addEventListener("click",()=>
+ $("terminalOutput").textContent="Terminal cleared.");
 
-function listFiles(){
- const picker = document.getElementById("filePicker");
- if(!picker) return;
- output.textContent = picker.files.length
-  ? "الملفات المختارة:\n"+Array.from(picker.files)
-      .map(file=>file.name+" ("+file.size+" bytes)").join("\n")
-  : "لم تختر أي ملفات.";
-}
+$("deviceStatus").addEventListener("click",()=>
+ $("deviceOutput").textContent=
+ "Status checked: "+new Date().toLocaleString()+
+ "\nNo pairing server configured.\nNo devices connected.");
 
-function reportDemo(){
- output.textContent =
- "PLATFORM REPORT\n"+
- "Web interface: Loaded\n"+
- "Security scan: Not implemented\n"+
- "Device pairing: Not implemented\n"+
- "File transfer server: Not configured\n"+
- "Training interface: Available";
+$("listFiles").addEventListener("click",()=>{
+ const files=[...$("fileInput").files];
+ $("fileOutput").textContent=files.length
+  ? files.map(f=>f.name+" — "+f.size+" bytes").join("\n")
+  : "لم يتم اختيار ملفات.";
+});
+
+function buildReport(){
+ return [
+  "DEVILS WILL RISE — STATUS REPORT",
+  "Generated: "+new Date().toLocaleString(),
+  "Web interface: loaded",
+  "URL syntax checker: available",
+  "Cyber Lab: training checklist available",
+  "Terminal: simulated commands only",
+  "Device server: not configured",
+  "File transfer server: not configured"
+ ].join("\n");
 }
+$("makeReport").addEventListener("click",()=>
+ $("reportOutput").textContent=buildReport());
+$("downloadReport").addEventListener("click",()=>{
+ const blob=new Blob([buildReport()],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;a.download="devils-will-rise-report.txt";
+ a.click();URL.revokeObjectURL(url);
+});
+
+/* Decorative Matrix animation */
+const canvas=$("matrix"),ctx=canvas.getContext("2d");
+let drops=[],columns=0;
+function resizeMatrix(){
+ const dpr=Math.min(window.devicePixelRatio||1,2);
+ canvas.width=innerWidth*dpr;
+ canvas.height=innerHeight*dpr;
+ canvas.style.width=innerWidth+"px";
+ canvas.style.height=innerHeight+"px";
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ columns=Math.ceil(innerWidth/16);
+ drops=Array(columns).fill(1);
+}
+resizeMatrix();
+window.addEventListener("resize",resizeMatrix);
+function drawMatrix(){
+ ctx.fillStyle="rgba(5,5,5,0.09)";
+ ctx.fillRect(0,0,innerWidth,innerHeight);
+ ctx.font="14px monospace";
+ for(let i=0;i<drops.length;i++){
+  const char=String.fromCharCode(0x30A0+Math.random()*96);
+  ctx.fillStyle=Math.random()>.985?"#ff2345":"#00ff88";
+  ctx.fillText(char,i*16,drops[i]*16);
+  if(drops[i]*16>innerHeight&&Math.random()>.975)drops[i]=0;
+  drops[i]++;
+ }
+ requestAnimationFrame(drawMatrix);
+}
+drawMatrix();
 </script></body>
-  </html>
+</html>
